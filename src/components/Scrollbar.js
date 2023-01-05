@@ -22,6 +22,7 @@ const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
       opacity: 1,
     },
   },
+
   '& .simplebar-track.simplebar-vertical': {
     width: 10,
   },
@@ -31,9 +32,9 @@ const SimpleBarStyle = styled(SimpleBarReact)(({ theme }) => ({
   '& .simplebar-mask': {
     zIndex: 'inherit',
   },
-  "& .simplebar-placeholder": {
+  '& .simplebar-placeholder': {
     height: '0 !important',
-  }
+  },
 }));
 
 // ----------------------------------------------------------------------
@@ -50,7 +51,10 @@ export default function Scrollbar({ children, sx, ...other }) {
 
   if (isMobile) {
     return (
-      <Box sx={{ overflowX: 'auto', ...sx }} {...other}>
+      <Box
+        sx={{ overflowX: 'auto', ...sx }}
+        {...other}
+      >
         {children}
       </Box>
     );
@@ -58,11 +62,16 @@ export default function Scrollbar({ children, sx, ...other }) {
 
   return (
     <RootStyle>
-      <SimpleBarStyle timeout={500} clickOnTrack={false} sx={sx} {...other}>
+      <SimpleBarStyle
+        timeout={500}
+        clickOnTrack={false}
+        sx={sx}
+        {...other}
+      >
         {children}
       </SimpleBarStyle>
     </RootStyle>
   );
 }
 
-export {SimpleBarStyle};
+export { SimpleBarStyle };

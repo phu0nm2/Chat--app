@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Box, IconButton, Typography, Stack, InputBase, Button, Divider, Avatar, Badge } from '@mui/material';
-import { alpha, styled } from '@mui/material/styles';
+import { alpha, styled, useTheme } from '@mui/material/styles';
 import { faker } from '@faker-js/faker';
 import icons from '../../assets/Images';
 import { ChatList } from '../../data';
@@ -35,8 +35,9 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: 'inherit',
-  backgroundColor: '#EAF2FE',
+  width: '100%',
+  color: theme.palette.mode === 'light' ? 'inherit' : 'gray',
+  backgroundColor: theme.palette.mode === 'light' ? '#EAF2FE' : '#1d1c1c',
   borderRadius: '20px',
   placeholder: '#709CE6',
   '& .MuiInputBase-input': {
@@ -51,7 +52,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
   },
 }));
 
-// with badege
+// with badege (tạo thông báo nhỏ kế bên)
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
     backgroundColor: '#44b700',
@@ -82,6 +83,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }));
 
 const AvatarElement = (props) => {
+  const theme = useTheme();
   // const rs = ChatList.filter((items) => items?.pinned);
   // rs.map((item) => console.log(item));
   const { id, img, name, msg, time, unread, pinned, online } = props;
@@ -92,7 +94,7 @@ const AvatarElement = (props) => {
       sx={{
         width: '100%',
         height: 60,
-        bgcolor: '#fff',
+        backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#1d1c1c',
         borderRadius: 1,
       }}
     >
@@ -126,7 +128,7 @@ const AvatarElement = (props) => {
           <Stack>
             <Typography
               variant="subtitle2"
-              color={'#030303'}
+              color={theme.palette.mode === 'light' ? '#030303' : 'gray'}
             >
               {name}
             </Typography>
@@ -160,12 +162,13 @@ const AvatarElement = (props) => {
 };
 
 const Chats = () => {
+  const theme = useTheme();
   return (
     <Box
       sx={{
         position: 'relative',
         width: 320,
-        backgroundColor: '#F8FAFF',
+        backgroundColor: theme.palette.mode === 'light' ? '#F8FAFF' : theme.palette.background.default,
         boxShadow: '0px 0px 4px rgba(0, 0, 0, 0.25)',
       }}
     >
@@ -190,7 +193,7 @@ const Chats = () => {
           </IconButton>
         </Stack>
 
-        <Search sx={{ width: '100%' }}>
+        <Search sx={{ width: '100%', borderRadius: '20px' }}>
           <SearchIconWrapper>
             <img
               style={{ zIndex: '1' }}
@@ -229,7 +232,7 @@ const Chats = () => {
             timeout={500}
             clickOnTrack={false}
           >
-            <Stack>
+            <Stack spacing={1}>
               <Stack p={2}>
                 <Typography
                   variant="subtitle1"
