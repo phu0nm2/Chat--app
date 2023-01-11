@@ -1,86 +1,14 @@
 import React from 'react';
 
-import { Box, IconButton, Typography, Stack, InputBase, Button, Divider, Avatar, Badge } from '@mui/material';
-import { alpha, styled, useTheme } from '@mui/material/styles';
-import { faker } from '@faker-js/faker';
+import { Box, IconButton, Typography, Stack, Button, Divider, Avatar, Badge } from '@mui/material';
+import { useTheme } from '@mui/material/styles';
+
 import icons from '../../assets/Images';
 import { ChatList } from '../../data';
 import { SimpleBarStyle } from '../../components/Scrollbar';
-
-// search
-const Search = styled('div')(({ theme }) => ({
-  position: 'relative',
-  borderRadius: theme.shape.borderRadius,
-  backgroundColor: alpha(theme.palette.common.white, 0.15),
-  '&:hover': {
-    backgroundColor: alpha(theme.palette.common.white, 0.25),
-  },
-  marginRight: theme.spacing(2),
-  marginLeft: 0,
-  width: '100%',
-  [theme.breakpoints.up('sm')]: {
-    marginLeft: theme.spacing(3),
-    width: 'auto',
-  },
-}));
-
-const SearchIconWrapper = styled('div')(({ theme }) => ({
-  padding: theme.spacing(0, 2),
-  height: '100%',
-  position: 'absolute',
-  pointerEvents: 'none',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-}));
-
-const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  width: '100%',
-  color: theme.palette.mode === 'light' ? 'inherit' : 'gray',
-  backgroundColor: theme.palette.mode === 'light' ? '#EAF2FE' : '#1d1c1c',
-  borderRadius: '20px',
-  placeholder: '#709CE6',
-  '& .MuiInputBase-input': {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)})`,
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('md')]: {
-      width: '20ch',
-    },
-  },
-}));
-
-// with badege (tạo thông báo nhỏ kế bên)
-const StyledBadge = styled(Badge)(({ theme }) => ({
-  '& .MuiBadge-badge': {
-    backgroundColor: '#44b700',
-    color: '#44b700',
-    boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
-    '&::after': {
-      position: 'absolute',
-      top: 0,
-      left: 0,
-      width: '100%',
-      height: '100%',
-      borderRadius: '50%',
-      animation: 'ripple 1.2s infinite ease-in-out',
-      border: '1px solid currentColor',
-      content: '""',
-    },
-  },
-  '@keyframes ripple': {
-    '0%': {
-      transform: 'scale(.8)',
-      opacity: 1,
-    },
-    '100%': {
-      transform: 'scale(2.4)',
-      opacity: 0,
-    },
-  },
-}));
+import { StyledBadge } from '../../components/StylesMaterial/StyledBadge';
+import { Search, SearchIconWrapper } from '../../components/StylesMaterial/Search';
+import { StyledInputBase } from '../../components/StylesMaterial/StyledInputBase';
 
 const AvatarElement = (props) => {
   const theme = useTheme();
@@ -90,11 +18,11 @@ const AvatarElement = (props) => {
 
   return (
     <Box
-      p={1}
+      p={1.5}
       sx={{
         width: '100%',
         height: 60,
-        backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#1d1c1c',
+        backgroundColor: theme.palette.mode === 'light' ? '#fff' : '#4b4f55',
         borderRadius: 1,
       }}
     >
@@ -232,7 +160,7 @@ const Chats = () => {
             timeout={500}
             clickOnTrack={false}
           >
-            <Stack spacing={1}>
+            <Stack spacing={2}>
               <Stack p={2}>
                 <Typography
                   variant="subtitle1"
@@ -252,7 +180,7 @@ const Chats = () => {
 
             <Stack
               direction={'column'}
-              spacing={1}
+              spacing={2}
             >
               <Stack p={2}>
                 <Typography
