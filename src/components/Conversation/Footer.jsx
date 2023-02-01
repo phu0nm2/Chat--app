@@ -8,7 +8,6 @@ import Picker from '@emoji-mart/react';
 import data from '@emoji-mart/data';
 
 import { Camera, File, Image, Sticker, User } from 'phosphor-react';
-import { palette } from '@mui/system';
 
 const Actions = [
   {
@@ -44,6 +43,16 @@ const Actions = [
 ];
 
 const ChatInput = ({ setIsOpenPicker }) => {
+  //toggle for LinkSimple actions
+  const [isOpenActions, setIsOpenActions] = React.useState(false);
+
+  const handleOpenActions = () => {
+    setIsOpenActions((prev) => !prev);
+  };
+
+  const handleOpenPicker = () => {
+    setIsOpenPicker((prev) => !prev);
+  };
   return (
     <TextField
       fullWidth
@@ -52,10 +61,11 @@ const ChatInput = ({ setIsOpenPicker }) => {
       InputProps={{
         startAdornment: (
           <>
-            <Stack sx={{ width: 'max-content', position: 'relative' }}>
+            <Stack sx={{ width: 'max-content', position: 'relative', display: isOpenActions ? 'block' : 'none' }}>
               {Actions.map((item) => (
                 <Tooltip
                   title={item.title}
+                  placement="right"
                   // sx={{ color: item.color }}
                 >
                   <Fab
@@ -70,7 +80,7 @@ const ChatInput = ({ setIsOpenPicker }) => {
               ))}
             </Stack>
             <InputAdornment position="start">
-              <IconButton>
+              <IconButton onClick={handleOpenActions}>
                 <Fab
                   size="small"
                   color="secondary"
@@ -82,13 +92,11 @@ const ChatInput = ({ setIsOpenPicker }) => {
             </InputAdornment>
           </>
         ),
+
+        //  button to picker icons
         endAdornment: (
           <InputAdornment position="end">
-            <IconButton
-              onClick={() => {
-                setIsOpenPicker((prev) => !prev);
-              }}
-            >
+            <IconButton onClick={handleOpenPicker}>
               <Smiley />
             </IconButton>
           </InputAdornment>
@@ -145,6 +153,7 @@ const Footer = () => {
             backgroundColor: theme.palette.primary.main,
           }}
         >
+          {/* sent icons */}
           <IconButton>
             <PaperPlaneTilt color="#fff" />
           </IconButton>

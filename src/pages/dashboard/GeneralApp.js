@@ -6,6 +6,7 @@ import Chats from './Chats';
 import { Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Conversation from '../../components/Conversation';
+import Contact from '../../components/Contact';
 
 const GeneralApp = () => {
   const theme = useTheme();
@@ -21,11 +22,14 @@ const GeneralApp = () => {
           sx={{
             height: '100%',
             backgroundColor: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default,
-            width: 'calc(100vw - 440px)',
+            width: 'calc(100vw - 799px)',
           }}
         >
           <Conversation />
         </Box>
+
+        {/* contact */}
+        <Contact />
       </Stack>
     </>
   );
