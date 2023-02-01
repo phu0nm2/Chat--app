@@ -2,8 +2,8 @@ import React from 'react';
 
 import { Box, Stack, useTheme } from '@mui/material';
 
-import ConversationHeader from './ConversationHeader';
-import ConversationFooter from './ConversationFooter';
+import Header from './Header';
+import Footer from './Footer';
 import Messenger from './Messenger';
 
 const Conversation = () => {
@@ -16,7 +16,7 @@ const Conversation = () => {
         width={'100%'}
       >
         {/* chat header */}
-        <ConversationHeader />
+        <Header />
         {/* chat content */}
         <Box
           width={'100%'}
@@ -31,7 +31,7 @@ const Conversation = () => {
         </Box>
 
         {/* chat footer */}
-        <ConversationFooter />
+        <Footer />
       </Stack>
     </>
   );

@@ -7,7 +7,7 @@ import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from 'phosphor-react';
 
 import { StyledBadge } from '../StylesMaterial/StyledBadge';
 
-const ConversationHeader = () => {
+const Header = () => {
   const theme = useTheme();
 
   return (
@@ -78,4 +78,4 @@ const ConversationHeader = () => {
   );
 };
 
-export default ConversationHeader;
+export default Header;

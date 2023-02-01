@@ -7,28 +7,57 @@ const Messenger = () => {
   return (
     <Box p={3}>
       <Stack>
-        {Chat_History.map((el) => {
+        {Chat_History.map((el, i) => {
           switch (el.type) {
             case 'divider':
               // timeline
-              return <MsgTimeline ele={el} />;
+              return (
+                <MsgTimeline
+                  key={i}
+                  ele={el}
+                />
+              );
 
             case 'msg':
               switch (el.subtype) {
                 case 'img':
-                  return <MediaMessage el={el} />;
+                  return (
+                    <MediaMessage
+                      key={i}
+                      el={el}
+                    />
+                  );
                 case 'doc':
-                  return <DocMessage el={el} />;
+                  return (
+                    <DocMessage
+                      key={i}
+                      el={el}
+                    />
+                  );
                 case 'link':
-                  return <LinkMessage el={el} />;
+                  return (
+                    <LinkMessage
+                      key={i}
+                      el={el}
+                    />
+                  );
                 case 'reply':
-                  return <ReplyMessage el={el} />;
+                  return (
+                    <ReplyMessage
+                      key={i}
+                      el={el}
+                    />
+                  );
 
                 default:
                   // text msg
-                  return <TextMessage el={el}></TextMessage>;
+                  return (
+                    <TextMessage
+                      key={i}
+                      el={el}
+                    ></TextMessage>
+                  );
               }
-              break;
             default:
               return <></>;
           }
