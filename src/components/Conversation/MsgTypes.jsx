@@ -34,8 +34,13 @@ const DotsThree = () => {
           'aria-labelledby': 'basic-button',
         }}
       >
-        {Message_options.map((item) => (
-          <MenuItem onClick={handleClose}>{item.title}</MenuItem>
+        {Message_options.map((item, i) => (
+          <MenuItem
+            key={i}
+            onClick={handleClose}
+          >
+            {item.title}
+          </MenuItem>
         ))}
       </Menu>
     </>

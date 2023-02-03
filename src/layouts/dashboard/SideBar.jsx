@@ -160,8 +160,11 @@ const SideBar = () => {
             }}
           >
             <Stack p={1}>
-              {Profile_Menu.map((item) => (
-                <MenuItem onClick={handleClose}>
+              {Profile_Menu.map((item, i) => (
+                <MenuItem
+                  key={i}
+                  onClick={handleClose}
+                >
                   <Stack
                     sx={{ width: 100 }}
                     direction="row"

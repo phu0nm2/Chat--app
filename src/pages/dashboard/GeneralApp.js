@@ -7,9 +7,13 @@ import { Stack } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import Conversation from '../../components/Conversation';
 import Contact from '../../components/Contact';
+import { useSelector } from 'react-redux';
 
 const GeneralApp = () => {
   const theme = useTheme();
+  const { sidebar } = useSelector((state) => state.app || {});
+  // console.log(sidebar);
+
   return (
     <>
       <Stack
@@ -20,16 +24,17 @@ const GeneralApp = () => {
 
         <Box
           sx={{
+            // sidebar left: 129px + 320px = 449px, contact: 350px
+            width: sidebar.open ? 'calc(100vw - 799px)' : 'calc(100vw - 440px)',
             height: '100%',
             backgroundColor: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default,
-            width: 'calc(100vw - 799px)',
           }}
         >
           <Conversation />
         </Box>
 
         {/* contact */}
-        <Contact />
+        {sidebar.open && <Contact />}
       </Stack>
     </>
   );

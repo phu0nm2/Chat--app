@@ -5,6 +5,9 @@ const icons = {
   magnifyingGlass: require('./MagnifyingGlass.svg').default,
   funnelSimple: require('./FunnelSimple.svg').default,
   ArchiveBox: require('./ArchiveBox.svg').default,
+  close: require('./Close.svg').default,
+  videoCamera: require('./VideoCamera.svg').default,
+  phone: require('./Phone.svg').default,
 };
 
 export default icons;

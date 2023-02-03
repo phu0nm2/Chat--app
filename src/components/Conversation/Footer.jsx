@@ -62,8 +62,9 @@ const ChatInput = ({ setIsOpenPicker }) => {
         startAdornment: (
           <>
             <Stack sx={{ width: 'max-content', position: 'relative', display: isOpenActions ? 'block' : 'none' }}>
-              {Actions.map((item) => (
+              {Actions.map((item, i) => (
                 <Tooltip
+                  key={i}
                   title={item.title}
                   placement="right"
                   // sx={{ color: item.color }}
@@ -80,15 +81,25 @@ const ChatInput = ({ setIsOpenPicker }) => {
               ))}
             </Stack>
             <InputAdornment position="start">
-              <IconButton onClick={handleOpenActions}>
-                <Fab
-                  size="small"
-                  color="secondary"
-                  aria-label="add"
-                >
-                  <LinkSimple />
-                </Fab>
-              </IconButton>
+              {/* Fab component is button, so don't use IconButton in case */}
+              {/* <IconButton onClick={handleOpenActions}>
+              <Fab
+                size="small"
+                color="secondary"
+                aria-label="add"
+              >
+                <LinkSimple />
+              </Fab>
+              </IconButton> */}
+
+              <Fab
+                onClick={handleOpenActions}
+                size="small"
+                color="secondary"
+                aria-label="add"
+              >
+                <LinkSimple />
+              </Fab>
             </InputAdornment>
           </>
         ),

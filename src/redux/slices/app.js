@@ -1,9 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { async } from 'emoji-mart';
 
 //
-import { dispatch } from '../store';
-
 const initialState = {
   sidebar: {
     open: false,

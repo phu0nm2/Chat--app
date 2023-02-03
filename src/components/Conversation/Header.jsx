@@ -6,10 +6,16 @@ import { faker } from '@faker-js/faker';
 import { CaretDown, MagnifyingGlass, Phone, VideoCamera } from 'phosphor-react';
 
 import { StyledBadge } from '../StylesMaterial/StyledBadge';
+import { useDispatch } from 'react-redux';
+import { toggleSidebarAction } from '../../redux/slices/app';
 
 const Header = () => {
   const theme = useTheme();
+  const dispatch = useDispatch();
 
+  const handleAvatar = () => {
+    dispatch(toggleSidebarAction());
+  };
   return (
     <Box
       p={2}
@@ -35,10 +41,15 @@ const Header = () => {
               anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }}
               variant="dot"
             >
-              <Avatar
-                src={faker.image.avatar()}
-                alt={faker.name.fullName()}
-              />
+              <IconButton
+                onClick={handleAvatar}
+                sx={{ padding: 0 }}
+              >
+                <Avatar
+                  src={faker.image.avatar()}
+                  alt={faker.name.fullName()}
+                />
+              </IconButton>
             </StyledBadge>
           </Box>
 
