@@ -1,10 +1,19 @@
-import React from 'react';
+import React from "react";
 
-import { Divider, Stack, Typography, Box, Link, Button, Menu, MenuItem } from '@mui/material';
-import { useTheme } from '@mui/material/styles';
+import {
+  Divider,
+  Stack,
+  Typography,
+  Box,
+  Link,
+  Button,
+  Menu,
+  MenuItem,
+} from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 
-import { DotsThreeVertical, DownloadSimple, Image } from 'phosphor-react';
-import { Message_options } from '../../data';
+import { DotsThreeVertical, DownloadSimple, Image } from "phosphor-react";
+import { Message_options } from "../../data";
 
 const DotsThree = () => {
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -19,9 +28,9 @@ const DotsThree = () => {
     <>
       <DotsThreeVertical
         id="basic-button"
-        aria-controls={open ? 'basic-menu' : undefined}
+        aria-controls={open ? "basic-menu" : undefined}
         aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
+        aria-expanded={open ? "true" : undefined}
         onClick={handleClick}
         size={20}
       />
@@ -31,14 +40,11 @@ const DotsThree = () => {
         open={open}
         onClose={handleClose}
         MenuListProps={{
-          'aria-labelledby': 'basic-button',
+          "aria-labelledby": "basic-button",
         }}
       >
         {Message_options.map((item, i) => (
-          <MenuItem
-            key={i}
-            onClick={handleClose}
-          >
+          <MenuItem key={i} onClick={handleClose}>
             {item.title}
           </MenuItem>
         ))}
@@ -52,20 +58,22 @@ export const TextMessage = ({ el }) => {
   return (
     <Stack
       p={2}
-      direction={'row'}
-      justifyContent={el.incoming ? 'start' : 'end'}
+      direction={"row"}
+      justifyContent={el.incoming ? "start" : "end"}
     >
       <Box
         p={1}
         sx={{
-          backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main,
+          backgroundColor: el.incoming
+            ? theme.palette.background.default
+            : theme.palette.primary.main,
           borderRadius: 1.5,
-          width: 'max-content',
+          width: "max-content",
         }}
       >
         <Typography
           variant="body2"
-          color={el.incoming ? theme.palette.text : '#fff'}
+          color={el.incoming ? theme.palette.text : "#fff"}
         >
           {el.message}
         </Typography>
@@ -81,21 +89,23 @@ export const MediaMessage = ({ el }) => {
   return (
     <Stack
       p={2}
-      direction={'row'}
-      justifyContent={el.incoming ? 'start' : 'end'}
+      direction={"row"}
+      justifyContent={el.incoming ? "start" : "end"}
     >
       <Box
         sx={{
-          backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main,
+          backgroundColor: el.incoming
+            ? theme.palette.background.default
+            : theme.palette.primary.main,
           borderRadius: 1.5,
-          width: 'max-content',
+          width: "max-content",
         }}
       >
         <Stack>
           <img
             src={el.img}
             alt={el.message}
-            style={{ maxHeight: 250, maxWidth: 250, borderRadius: '10px' }}
+            style={{ maxHeight: 250, maxWidth: 250, borderRadius: "10px" }}
           />
         </Stack>
       </Box>
@@ -109,21 +119,23 @@ export const LinkMessage = ({ el }) => {
   return (
     <Stack
       p={2}
-      direction={'row'}
-      justifyContent={el.incoming ? 'start' : 'end'}
+      direction={"row"}
+      justifyContent={el.incoming ? "start" : "end"}
     >
       <Box
         sx={{
-          backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main,
+          backgroundColor: el.incoming
+            ? theme.palette.background.default
+            : theme.palette.primary.main,
           borderRadius: 1.5,
-          width: 'max-content',
+          width: "max-content",
         }}
       >
         <Button>
           <img
             src={el.preview}
             alt={el.message}
-            style={{ maxHeight: 250, maxWidth: 250, borderRadius: '10px' }}
+            style={{ maxHeight: 250, maxWidth: 250, borderRadius: "10px" }}
           />
         </Button>
       </Box>
@@ -140,26 +152,28 @@ export const DocMessage = ({ el }) => {
   return (
     <Stack
       p={2}
-      direction={'row'}
-      justifyContent={el.incoming ? 'start' : 'end'}
+      direction={"row"}
+      justifyContent={el.incoming ? "start" : "end"}
     >
       <Box
         p={1.5}
         sx={{
-          backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main,
+          backgroundColor: el.incoming
+            ? theme.palette.background.default
+            : theme.palette.primary.main,
           borderRadius: 1.5,
-          width: 'max-content',
+          width: "max-content",
         }}
       >
         <Stack
           p={2}
           spacing={2}
-          direction={'row'}
-          justifyContent={'space-between'}
-          alignItems={'center'}
+          direction={"row"}
+          justifyContent={"space-between"}
+          alignItems={"center"}
           sx={{
             backgroundColor: theme.palette.background.paper,
-            borderRadius: '10px',
+            borderRadius: "10px",
           }}
         >
           <Image size={25} />
@@ -169,7 +183,7 @@ export const DocMessage = ({ el }) => {
 
         <Typography
           variant="body2"
-          color={el.incoming ? theme.palette.text : '#fff'}
+          color={el.incoming ? theme.palette.text : "#fff"}
         >
           {el.message}
         </Typography>
@@ -184,30 +198,31 @@ export const ReplyMessage = ({ el }) => {
   return (
     <Stack
       p={2}
-      direction={'row'}
-      justifyContent={el.incoming ? 'start' : 'end'}
+      direction={"row"}
+      justifyContent={el.incoming ? "start" : "end"}
     >
       <Box
         sx={{
-          backgroundColor: el.incoming ? theme.palette.background.default : theme.palette.primary.main,
+          backgroundColor: el.incoming
+            ? theme.palette.background.default
+            : theme.palette.primary.main,
           borderRadius: 1.5,
-          width: 'max-content',
+          width: "max-content",
         }}
       >
-        <Stack
-          direction={'column'}
-          spacing={1}
-          p={1}
-        >
+        <Stack direction={"column"} spacing={1} p={1}>
           <Stack
             p={1}
-            sx={{ borderRadius: 1, backgroundColor: theme.palette.background.paper }}
+            sx={{
+              borderRadius: 1,
+              backgroundColor: theme.palette.background.paper,
+            }}
           >
             <Typography variant="body2">{el.message}</Typography>
           </Stack>
           <Typography
             variant="body2"
-            color={el.incoming ? theme.palette.text : '#fff'}
+            color={el.incoming ? theme.palette.text : "#fff"}
           >
             {el.reply}
           </Typography>
@@ -224,16 +239,13 @@ export const MsgTimeline = ({ ele }) => {
   //   console.log(props);
   return (
     <Stack
-      direction={'row'}
-      justifyContent={'space-between'}
-      alignItems={'center'}
+      direction={"row"}
+      justifyContent={"space-between"}
+      alignItems={"center"}
     >
       <Divider width="46%" />
 
-      <Typography
-        variant="caption"
-        sx={{ color: theme.palette.text }}
-      >
+      <Typography variant="caption" sx={{ color: theme.palette.text }}>
         {ele.text}
       </Typography>
       <Divider width="46%" />
