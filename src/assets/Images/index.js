@@ -1,5 +1,6 @@
 const icons = {
   logo: require("./logo.ico").default,
+  Logo: require("./Logo.svg").default,
   budgie: require("./Budgie.svg").default,
   circleDashed: require("./CircleDashed.svg").default,
   magnifyingGlass: require("./MagnifyingGlass.svg").default,

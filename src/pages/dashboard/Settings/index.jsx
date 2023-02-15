@@ -10,6 +10,7 @@ import {
   MenuItem,
   Typography,
   Button,
+  Link,
 } from "@mui/material";
 import {
   Article,
@@ -23,14 +24,14 @@ import {
   WarningCircle,
 } from "phosphor-react";
 
-import { Link, useNavigate } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { faker } from "@faker-js/faker";
 
 import icons from "../../../assets/Images";
 import useSettings from "../../../hooks/useSettings";
 import { Nav_Buttons, Nav_Setting, Profile_Menu } from "../../../data";
 import { DarkLightSwitch } from "../../../components/StylesMaterial/DarkLightSwitch";
-import ShortcutDialog from "../../../components/Sections/ShortcutDialog";
+import ShortcutDialog from "../../../components/Sections/settings/ShortcutDialog";
 
 const Settings = () => {
   const theme = useTheme();
@@ -142,7 +143,7 @@ const Settings = () => {
               {/* map setting Icon */}
               {Nav_Setting.map((item, i) =>
                 item.index === selected ? (
-                  <Link to="/settings" key={item.index}>
+                  <Link to="/settings" component={RouterLink} key={item.index}>
                     <Box
                       p={0.5}
                       sx={{
@@ -156,7 +157,7 @@ const Settings = () => {
                     </Box>
                   </Link>
                 ) : (
-                  <Link to="/settings" key={item.index}>
+                  <Link to="/settings" component={RouterLink} key={item.index}>
                     <Box p={0.5} sx={{ borderRadius: 1.5 }}>
                       <IconButton
                         onClick={() => handleChangeTab(item.index)}
@@ -309,7 +310,14 @@ const Settings = () => {
           <img width={222} height={222} src={icons.settings} alt="settings" />
 
           <Typography variant="caption">
-            Select a conversation or start a new one
+            Select a conversation or start a{" "}
+            <Link
+              to="/settings/newone"
+              component={RouterLink}
+              variant="subtitle"
+            >
+              new one
+            </Link>
           </Typography>
         </Stack>
 
