@@ -17,13 +17,15 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-const ShortcutDialog = ({ open, handleClose }) => {
+const ShortcutDialog = (props) => {
+  const { open, handleClose } = props;
+
   return (
     <Dialog
       fullWidth
       maxWidth="md"
       open={open}
-      handleClose={handleClose}
+      onClose={handleClose}
       keepMounted
       TransitionComponent={Transition}
     >
