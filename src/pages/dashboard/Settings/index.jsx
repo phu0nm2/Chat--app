@@ -16,7 +16,6 @@ import {
   BellRinging,
   CaretLeft,
   ClipboardText,
-  Divide,
   Image,
   Key,
   Lock,
@@ -38,6 +37,15 @@ const Settings = () => {
   const navigate = useNavigate();
   const { onToggleMode } = useSettings();
   const [selected, setSelected] = React.useState(0);
+  const [isOpenKeyboardShortcuts, setIsOpenKeyboardShortcuts] =
+    React.useState(false);
+
+  const handleOpenKeyboardShortCut = () => {
+    setIsOpenKeyboardShortcuts(true);
+  };
+  const handleCloseKeyboardShortCut = () => {
+    setIsOpenKeyboardShortcuts(false);
+  };
 
   const handleChangeTab = (e) => {
     setSelected(e);
@@ -276,7 +284,10 @@ const Settings = () => {
                 <Typography variant="subtitle">Request Account Info</Typography>
               </Button>
               <Divider />
-              <Button startIcon={<Article />}>
+              <Button
+                onClick={handleOpenKeyboardShortCut}
+                startIcon={<Article />}
+              >
                 <Typography variant="subtitle">Keyboard shortcuts</Typography>
               </Button>
               <Divider />
@@ -302,7 +313,10 @@ const Settings = () => {
           </Typography>
         </Stack>
 
-        <ShortcutDialog open={true} handleClose={() => {}} />
+        <ShortcutDialog
+          open={isOpenKeyboardShortcuts}
+          handleClose={handleCloseKeyboardShortCut}
+        />
       </Stack>
     </Box>
   );

@@ -1,6 +1,8 @@
 import {
   Box,
+  Button,
   Dialog,
+  DialogActions,
   DialogContent,
   DialogTitle,
   Grid,
@@ -29,22 +31,32 @@ const ShortcutDialog = ({ open, handleClose }) => {
       <DialogContent>
         <Grid>
           {List_Keyboard.map(({ key, title, combination }) => (
-            <Box key={key}>
-              <Grid item xs={6}>
-                <Stack
-                  sx={{ width: "100%" }}
-                  justifyContent={"space-between"}
-                  alignItems={"center"}
-                  direction={"row"}
-                  spacing={3}
-                >
-                  <Typography variant="title">{title}</Typography>
+            <Grid key={key} item xs={6}>
+              <Stack
+                sx={{ width: "100%" }}
+                justifyContent={"space-between"}
+                alignItems={"center"}
+                direction={"row"}
+                spacing={2}
+              >
+                <Typography variant="title">{title}</Typography>
+                <Stack direction={"row"} spacing={2} p={1}>
+                  {combination.map((item, i) => (
+                    <Button disabled variant="contained" key={i}>
+                      {item}
+                    </Button>
+                  ))}
                 </Stack>
-              </Grid>
-            </Box>
+              </Stack>
+            </Grid>
           ))}
         </Grid>
       </DialogContent>
+      <DialogActions>
+        <Button variant="contained" onClick={handleClose}>
+          OK
+        </Button>
+      </DialogActions>
     </Dialog>
   );
 };
