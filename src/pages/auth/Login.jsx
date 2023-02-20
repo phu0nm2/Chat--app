@@ -10,7 +10,14 @@ const Login = () => {
   return (
     <Stack bgcolor={"#ede5e5"} p={2} sx={{ borderRadius: 2 }}>
       <Stack mb={2}>
-        <Typography variant="h4">Login to Talk</Typography>
+        <Typography
+          variant="h4"
+          sx={{
+            color: "#000",
+          }}
+        >
+          Login to Talk
+        </Typography>
       </Stack>
 
       {/* Login form */}
@@ -26,19 +33,27 @@ const Login = () => {
         p={3}
       >
         <Stack direction={"row"} spacing={1}>
-          <Typography variant="subtitle">New user?</Typography>
+          <Typography
+            sx={{
+              color: "#000",
+            }}
+            variant="subtitle"
+          >
+            New user?
+          </Typography>
 
           {/* still got error with the route register */}
-          <Link to="/auth/resgister" component={RouterLink} variant="subtitle">
+          <Link to="/auth/register" component={RouterLink} variant="subtitle">
             Create an account
           </Link>
         </Stack>
         <Stack>
-          <Link variant="body2" color={"inherit"} underline="always">
+          <Link variant="body2" color={"#000"} underline="always">
             Forgot Password?
           </Link>
         </Stack>
       </Stack>
+
       {/* Auth Social */}
       <AuthSocial />
     </Stack>

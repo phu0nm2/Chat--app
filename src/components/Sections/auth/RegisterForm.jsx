@@ -1,5 +1,10 @@
 import React from "react";
 
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { Eye, EyeSlash } from "phosphor-react";
+
 import {
   Alert,
   Box,
@@ -11,17 +16,14 @@ import {
   Typography,
 } from "@mui/material";
 
-import * as yup from "yup";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-
 import FormProvider from "../../hook-form/FormProvider";
-import { Eye, EyeSlash } from "phosphor-react";
 
-const LoginForm = () => {
+const RegisterForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
 
   const schema = yup.object().shape({
+    firstName: yup.string().required("First name is required!"),
+    lastName: yup.string().required("Last name is required!"),
     email: yup
       .string()
       .required("Email is required!")
@@ -30,6 +32,8 @@ const LoginForm = () => {
   });
 
   const defaultValues = {
+    firstName: "",
+    lastName: "",
     email: "teppppp2@gmail.com",
     password: "ab123456",
   };
@@ -50,7 +54,6 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       // submit data to BE
-      console.log(data);
     } catch (error) {
       console.log("error", error);
       reset();
@@ -64,17 +67,51 @@ const LoginForm = () => {
   const handleMouseDownPassword = (event) => {
     event.preventDefault();
   };
+
   return (
     <FormProvider
       methods={methods}
       onSubmit={handleSubmit(handleSubmit(onSubmit))}
     >
+      {" "}
       <Stack spacing={3}>
         {!!errors.afterSubmit && (
           <Alert severity="error">{errors.afterSubmit.message}</Alert>
         )}
       </Stack>
-
+      <Box
+        mt={2}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          "& > :not(style)": { m: 1 },
+        }}
+      >
+        <Stack spacing={3} direction={"row"}>
+          <Stack>
+            <TextField
+              sx={{
+                input: { color: "#000" },
+              }}
+              id="firstname"
+              name="firstname"
+              label="Your first name"
+              {...register("firstName", { required: true })}
+            />
+          </Stack>
+          <Stack>
+            <TextField
+              sx={{
+                input: { color: "#000" },
+              }}
+              id="lastname"
+              name="lastname"
+              label="Your last name"
+              {...register("lastName", { required: true })}
+            />
+          </Stack>
+        </Stack>
+      </Box>
       <Box
         sx={{
           display: "flex",
@@ -123,7 +160,6 @@ const LoginForm = () => {
           />
         </Stack>
       </Box>
-
       <Stack sx={{ width: "100%" }} mt={2} alignItems={"center"}>
         <Button
           type="submit"
@@ -132,11 +168,11 @@ const LoginForm = () => {
           color="secondary"
           variant="contained"
         >
-          Login
+          Create account
         </Button>
       </Stack>
     </FormProvider>
   );
 };
 
-export default LoginForm;
+export default RegisterForm;
