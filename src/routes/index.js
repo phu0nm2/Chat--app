@@ -7,7 +7,6 @@ import DashboardLayout from "../layouts/dashboard";
 // config
 import { DEFAULT_PATH } from "../config";
 import LoadingScreen from "../components/LoadingScreen";
-import Settings from "../pages/dashboard/Settings";
 import MainLayout from "../layouts/main";
 
 const Loadable = (Component) => (props) => {
@@ -28,6 +27,10 @@ export default function Router() {
           path: "login",
           element: <LoginPage />,
         },
+        {
+          path: "register",
+          element: <RegisterPage />,
+        },
       ],
     },
     {
@@ -42,7 +45,7 @@ export default function Router() {
       ],
     },
     { path: "*", element: <Navigate to="/404" replace /> },
-    { path: "settings", element: <Settings /> },
+    { path: "settings", element: <SettingsPage /> },
   ]);
 }
 
@@ -51,7 +54,10 @@ const GeneralApp = Loadable(
 );
 
 const LoginPage = Loadable(lazy(() => import("../pages/auth/Login")));
+const RegisterPage = Loadable(lazy(() => import("../pages/auth/Register")));
 
-// const Settings = Loadable(lazy(() => import("../pages/dashboard/Settings")));
+const SettingsPage = Loadable(
+  lazy(() => import("../pages/dashboard/Settings")),
+);
 
 const Page404 = Loadable(lazy(() => import("../pages/Page404")));

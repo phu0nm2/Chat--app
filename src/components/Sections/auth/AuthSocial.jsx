@@ -1,6 +1,6 @@
 import React from "react";
 
-import { IconButton, Divider, Stack, Button } from "@mui/material";
+import { IconButton, Divider, Stack } from "@mui/material";
 import {
   FacebookLogo,
   GithubLogo,
@@ -35,17 +35,6 @@ const AuthSocial = () => {
         <IconButton>
           <GithubLogo width={40} height={40} />
         </IconButton>
-      </Stack>
-
-      <Stack sx={{ width: "100%" }} p={2} alignItems={"center"}>
-        <Button
-          size="large"
-          sx={{ width: 300 }}
-          color="secondary"
-          variant="contained"
-        >
-          Login
-        </Button>
       </Stack>
     </Stack>
   );
