@@ -13,7 +13,8 @@ const AvatarElement = (props) => {
       sx={{
         width: "100%",
         height: 60,
-        backgroundColor: theme.palette.mode === "light" ? "#fff" : "#4b4f55",
+        backgroundColor:
+          theme.palette.mode === "light" ? "rgba(217,213,213,0.7)" : "#4b4f55",
         borderRadius: 1,
       }}
     >
@@ -38,18 +39,24 @@ const AvatarElement = (props) => {
           <Stack>
             <Typography
               variant="subtitle2"
-              color={theme.palette.mode === "light" ? "#030303" : "gray"}
+              color={theme.palette.mode === "light" ? "#000000" : "#ffff"}
             >
               {name}
             </Typography>
-            <Typography variant="caption" color={"#7C7C7D"}>
+            <Typography
+              variant="caption"
+              color={theme.palette.mode === "light" ? "#000000" : "#ffff"}
+            >
               {msg}
             </Typography>
           </Stack>
         </Stack>
 
         <Stack spacing={2} alignItems="center">
-          <Typography variant="caption" color={"#686768"}>
+          <Typography
+            variant="caption"
+            color={theme.palette.mode === "light" ? "#000000" : "#ffff"}
+          >
             {time}
           </Typography>
           <Badge color="primary" badgeContent={unread}></Badge>
