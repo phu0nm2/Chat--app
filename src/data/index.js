@@ -46,6 +46,41 @@ const Nav_Setting = [
   },
 ];
 
+const CallList = [
+  {
+    id: 0,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    missid: false,
+    incoming: true,
+    time: "10:22 AM",
+  },
+  {
+    id: 1,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    missid: true,
+    incoming: false,
+    time: "8:20 PM",
+  },
+  {
+    id: 2,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    missid: false,
+    incoming: false,
+    time: "5:10 PM",
+  },
+  {
+    id: 3,
+    img: faker.image.avatar(),
+    name: faker.name.firstName(),
+    missid: true,
+    incoming: true,
+    time: "12:01 AM",
+  },
+];
+
 const ChatList = [
   {
     id: 0,
@@ -435,4 +470,5 @@ export {
   Links,
   Shared_Docs,
   List_Keyboard,
+  CallList,
 };

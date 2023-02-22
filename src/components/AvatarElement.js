@@ -1,4 +1,4 @@
-import { StyledBadge } from "../../components/StylesMaterial/StyledBadge";
+import { StyledBadge } from "./StylesMaterial/StyledBadge";
 import { Box, Typography, Stack, Avatar, Badge, useTheme } from "@mui/material";
 
 const AvatarElement = (props) => {

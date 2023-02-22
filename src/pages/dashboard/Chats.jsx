@@ -19,7 +19,7 @@ import {
   SearchIconWrapper,
 } from "../../components/StylesMaterial/Search";
 import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase";
-import AvatarElement from "../../components/StylesMaterial/AvatarElement";
+import AvatarElement from "../../components/AvatarElement";
 
 const Chats = () => {
   const theme = useTheme();

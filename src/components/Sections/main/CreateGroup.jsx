@@ -9,6 +9,7 @@ import {
   Slide,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { XCircle } from "phosphor-react";
 import * as yup from "yup";
@@ -99,6 +100,8 @@ const CreateGroupForm = ({}) => {
 };
 
 const CreateGroup = ({ open, handleClose }) => {
+  const theme = useTheme();
+
   return (
     <Dialog
       fullWidth
@@ -109,7 +112,14 @@ const CreateGroup = ({ open, handleClose }) => {
       keepMounted
     >
       {/* Title */}
-      <DialogTitle>
+      <DialogTitle
+        sx={{
+          background:
+            theme.palette.mode === "light"
+              ? "rgba(25,28,36,0.1)"
+              : theme.palette.background.default,
+        }}
+      >
         <Stack
           mb={2}
           direction={"row"}
@@ -123,7 +133,14 @@ const CreateGroup = ({ open, handleClose }) => {
         </Stack>
       </DialogTitle>
       {/* Content */}
-      <DialogContent>
+      <DialogContent
+        sx={{
+          background:
+            theme.palette.mode === "light"
+              ? "rgba(25,28,36,0.1)"
+              : theme.palette.background.default,
+        }}
+      >
         {/* form */}
         <CreateGroupForm />
       </DialogContent>
