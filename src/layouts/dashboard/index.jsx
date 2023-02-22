@@ -1,15 +1,15 @@
-import React from 'react';
+import React from "react";
 
-import { Stack } from '@mui/material';
+import { Stack } from "@mui/material";
 
-import GeneralApp from '../../pages/dashboard/GeneralApp';
-import SideBar from './SideBar';
+import GeneralApp from "../../pages/dashboard/GeneralApp";
+import SideBar from "./SideBar";
 // import { Outlet } from 'react-router-dom';
 
 const DashboardLayout = () => {
   return (
     <>
-      <Stack direction={'row'}>
+      <Stack direction={"row"}>
         {/* SideBar */}
         <SideBar />
 

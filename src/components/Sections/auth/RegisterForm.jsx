@@ -12,11 +12,10 @@ import {
   IconButton,
   InputAdornment,
   Stack,
-  TextField,
-  Typography,
 } from "@mui/material";
 
 import FormProvider from "../../hook-form/FormProvider";
+import RHFTextField from "../../hook-form/RHFTextField";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
@@ -34,8 +33,8 @@ const RegisterForm = () => {
   const defaultValues = {
     firstName: "",
     lastName: "",
-    email: "teppppp2@gmail.com",
-    password: "ab123456",
+    email: "",
+    password: "",
   };
 
   const methods = useForm({
@@ -44,7 +43,6 @@ const RegisterForm = () => {
   });
 
   const {
-    register,
     handleSubmit,
     reset,
     setError,
@@ -64,16 +62,12 @@ const RegisterForm = () => {
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
   };
-  const handleMouseDownPassword = (event) => {
-    event.preventDefault();
-  };
 
   return (
     <FormProvider
       methods={methods}
       onSubmit={handleSubmit(handleSubmit(onSubmit))}
     >
-      {" "}
       <Stack spacing={3}>
         {!!errors.afterSubmit && (
           <Alert severity="error">{errors.afterSubmit.message}</Alert>
@@ -89,26 +83,10 @@ const RegisterForm = () => {
       >
         <Stack spacing={3} direction={"row"}>
           <Stack>
-            <TextField
-              sx={{
-                input: { color: "#000" },
-              }}
-              id="firstname"
-              name="firstname"
-              label="Your first name"
-              {...register("firstName", { required: true })}
-            />
+            <RHFTextField name="firstName" label="First name" />
           </Stack>
           <Stack>
-            <TextField
-              sx={{
-                input: { color: "#000" },
-              }}
-              id="lastname"
-              name="lastname"
-              label="Your last name"
-              {...register("lastName", { required: true })}
-            />
+            <RHFTextField name="lastName" label="Last name" />
           </Stack>
         </Stack>
       </Box>
@@ -120,38 +98,15 @@ const RegisterForm = () => {
         }}
       >
         <Stack spacing={3}>
-          <TextField
-            sx={{
-              input: { color: "#000" },
-            }}
-            {...register("email", { required: true })}
-            name="email"
-            id="email"
-            label="Your email"
-          />
-          {errors.email && (
-            <Typography variant="caption" color={"red"}>
-              Email must be a valid email address
-            </Typography>
-          )}
-
-          <TextField
-            sx={{ input: { color: "#000" } }}
-            id="password"
+          <RHFTextField name="email" label="Email" />
+          <RHFTextField
             name="password"
+            label="Password"
             type={showPassword ? "text" : "password"}
-            label="Your password"
-            value={defaultValues.password}
-            {...("password", { required: true })}
             inputProps={{
               endadornment: (
                 <InputAdornment position="end">
-                  <IconButton
-                    aria-label="toggle password visibility"
-                    onClick={handleShowPassword}
-                    onMouseDown={handleMouseDownPassword}
-                    edge="end"
-                  >
+                  <IconButton onClick={handleShowPassword} edge="end">
                     {showPassword ? <Eye /> : <EyeSlash />}
                   </IconButton>
                 </InputAdornment>
