@@ -17,27 +17,57 @@ import icons from "../../assets/Images";
 import { Nav_Buttons, Nav_Setting, Profile_Menu } from "../../data";
 import useSettings from "../../hooks/useSettings";
 import { DarkLightSwitch } from "../../components/StylesMaterial/DarkLightSwitch";
-import { Link } from "react-router-dom";
-// import { useNavigate } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
+import { ChatCircleDots, Phone, User } from "phosphor-react";
+import "./Sidebar.scss";
+
+const getPatch = (index) => {
+  switch (index) {
+    case 3:
+      return "/settings";
+
+    default:
+      break;
+  }
+};
+const getMenuPatch = (index) => {
+  switch (index) {
+    case 0:
+      return "/profile";
+    case 1:
+      return "/settings";
+    case 2:
+      // need update isAuth = false
+      return "/auth/login";
+    default:
+      break;
+  }
+};
 
 const SideBar = () => {
   const theme = useTheme();
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const { onToggleMode } = useSettings();
   const [selected, setSelected] = React.useState(0);
-
-  const handleChangeTab = (e) => {
-    setSelected(e);
-    // navigate("/settings");
-  };
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleChangeTab = (e) => {
+    setSelected(e);
+    navigate(getPatch(e));
+  };
+
+  const handleRedirectMenu = (e) => {
+    navigate(getMenuPatch(e));
+    console.log(e);
   };
 
   return (
@@ -68,15 +98,89 @@ const SideBar = () => {
               borderRadius: 1.5,
             }}
           >
-            <img
-              style={{ margin: "0 auto", padding: "13.5px 0" }}
-              src={icons.budgie}
-              alt="icon"
-            />
+            <Link to="/app">
+              <img
+                style={{ margin: "0 auto", padding: "13.5px 0" }}
+                src={icons.budgie}
+                alt="logo"
+              />
+            </Link>
           </Box>
-          <Stack spacing={3} sx={{ width: "max-content" }}>
-            {/* render sidebar Icons */}
-            {Nav_Buttons.map((item) =>
+
+          {/* render sidebar Icons */}
+          <Stack
+            justifyContent={"center"}
+            alignItems={"center"}
+            spacing={3}
+            sx={{ width: "max-content" }}
+            className="sidebar"
+          >
+            <NavLink
+              to="/app"
+              className={({ isActive }) =>
+                "sidebar_item " + (isActive ? "active" : "")
+              }
+            >
+              <IconButton>
+                <ChatCircleDots />
+              </IconButton>
+            </NavLink>
+
+            <NavLink
+              to="/group"
+              className={({ isActive }) =>
+                "sidebar_item " + (isActive ? "active" : "")
+              }
+            >
+              <IconButton className="">
+                <User />
+              </IconButton>
+            </NavLink>
+
+            <NavLink
+              to="/call"
+              className={({ isActive }) =>
+                "sidebar_item " + (isActive ? "active" : "")
+              }
+            >
+              <IconButton className="">
+                <Phone />
+              </IconButton>
+            </NavLink>
+            {/* {Nav_Buttons.map((item) =>
+              item.index === selected ? (
+                <Box
+                  p={0.5}
+                  key={item.index}
+                  sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    borderRadius: 1.5,
+                  }}
+                >
+                  <IconButton sx={{ color: "#fff", width: "max-content" }}>
+                    {item.icon}
+                  </IconButton>
+                </Box>
+              ) : (
+                <IconButton
+                  key={item.index}
+                  onClick={() => handleChangeTab(item.index)}
+                  sx={{
+                    color:
+                      theme.palette.mode === "light"
+                        ? "#000"
+                        : theme.palette.text.primary,
+                    width: "max-content",
+                  }}
+                >
+                  {item.icon}
+                </IconButton>
+              ),
+            )} */}
+            <Divider sx={{ width: 48 }} />
+
+            {/* map setting Icon */}
+            {Nav_Setting.map((item, i) =>
               item.index === selected ? (
                 <Box
                   key={item.index}
@@ -91,56 +195,19 @@ const SideBar = () => {
                   </IconButton>
                 </Box>
               ) : (
-                <Box key={item.index} p={0.5} sx={{ borderRadius: 1.5 }}>
-                  <IconButton
-                    onClick={() => handleChangeTab(item.index)}
-                    sx={{
-                      color:
-                        theme.palette.mode === "light"
-                          ? "#000"
-                          : theme.palette.text.primary,
-                      width: "max-content",
-                    }}
-                  >
-                    {item.icon}
-                  </IconButton>
-                </Box>
-              ),
-            )}
-            <Divider sx={{ width: 48 }} /> {/* hr */}
-            {/* map setting Icon */}
-            {Nav_Setting.map((item, i) =>
-              item.index === selected ? (
-                <Link to="/settings" key={item.index}>
-                  <Box
-                    p={0.5}
-                    sx={{
-                      backgroundColor: theme.palette.primary.main,
-                      borderRadius: 1.5,
-                    }}
-                  >
-                    <IconButton sx={{ color: "#fff", width: "max-content" }}>
-                      {item.icon}
-                    </IconButton>
-                  </Box>
-                </Link>
-              ) : (
-                <Link to="/settings" key={item.index}>
-                  <Box p={0.5} sx={{ borderRadius: 1.5 }}>
-                    <IconButton
-                      onClick={() => handleChangeTab(item.index)}
-                      sx={{
-                        color:
-                          theme.palette.mode === "light"
-                            ? "#000"
-                            : theme.palette.text.primary,
-                        width: "max-content",
-                      }}
-                    >
-                      {item.icon}
-                    </IconButton>
-                  </Box>
-                </Link>
+                <IconButton
+                  key={item.index}
+                  onClick={() => handleChangeTab(item.index)}
+                  sx={{
+                    color:
+                      theme.palette.mode === "light"
+                        ? "#000"
+                        : theme.palette.text.primary,
+                    width: "max-content",
+                  }}
+                >
+                  {item.icon}
+                </IconButton>
               ),
             )}
           </Stack>
@@ -185,6 +252,7 @@ const SideBar = () => {
               {Profile_Menu.map((item, i) => (
                 <MenuItem key={i} onClick={handleClose}>
                   <Stack
+                    onClick={() => handleRedirectMenu(i)}
                     sx={{ width: 100 }}
                     direction="row"
                     justifyContent={"space-between"}

@@ -1,0 +1,10 @@
+.sidebar {
+  &_item {
+    // width: 50px;
+    // height: 50px;
+    border-radius: 12px;
+    &.active {
+      background: #0162c4;
+    }
+  }
+}
