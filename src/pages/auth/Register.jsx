@@ -17,7 +17,7 @@ const Register = () => {
         <Typography variant="subtitle" sx={{ color: "#000" }}>
           Already have an account?
         </Typography>
-        <Link to="/auth/login" component={RouterLink}>
+        <Link to="/auth/register" component={RouterLink}>
           Login
         </Link>
       </Stack>

@@ -6,7 +6,7 @@ import { Outlet, Navigate } from "react-router-dom";
 import icons from "../../assets/Images";
 
 const MainLayout = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
 
   if (isAuthenticated) {
     return <Navigate to="/app" />;

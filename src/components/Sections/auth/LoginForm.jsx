@@ -16,9 +16,14 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import FormProvider from "../../hook-form/FormProvider";
 import { Eye, EyeSlash } from "phosphor-react";
 import RHFTextField from "../../hook-form/RHFTextField";
+import { useDispatch } from "react-redux";
+import { signin } from "../../../redux/slices/user";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     email: yup
@@ -29,8 +34,8 @@ const LoginForm = () => {
   });
 
   const defaultValues = {
-    email: "",
-    password: "",
+    email: "teppppp3@gmail.com",
+    password: "123456",
   };
 
   const methods = useForm({
@@ -48,7 +53,11 @@ const LoginForm = () => {
   const onSubmit = async (data) => {
     try {
       // submit data to BE
-      console.log(data);
+      const handleRedirect = () => {
+        navigate("/app");
+      };
+      dispatch(signin(data, handleRedirect));
+      // console.log(data);
     } catch (error) {
       console.log("error", error);
       reset();
