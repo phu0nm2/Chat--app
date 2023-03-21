@@ -18,8 +18,10 @@ import { Nav_Buttons, Nav_Setting, Profile_Menu } from "../../data";
 import useSettings from "../../hooks/useSettings";
 import { DarkLightSwitch } from "../../components/StylesMaterial/DarkLightSwitch";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { ChatCircleDots, Phone, User } from "phosphor-react";
+import { ChatCircleDots, GearSix, Phone, User } from "phosphor-react";
 import "./Sidebar.scss";
+import { useDispatch } from "react-redux";
+import { logout } from "../../redux/slices/user";
 
 const getPatch = (index) => {
   switch (index) {
@@ -49,6 +51,7 @@ const SideBar = () => {
   const navigate = useNavigate();
   const { onToggleMode } = useSettings();
   const [selected, setSelected] = React.useState(0);
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl);
@@ -67,16 +70,21 @@ const SideBar = () => {
 
   const handleRedirectMenu = (e) => {
     navigate(getMenuPatch(e));
-    console.log(e);
+    if (e === 2) {
+      dispatch(logout());
+      localStorage.removeItem("token");
+    }
   };
 
   return (
     <Box
       sx={{
         backgroundColor: theme.palette.background.paper,
+        // backgroundColor: "blue",
         boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
         height: "100vh",
         width: 129,
+        maxWidth: 120,
         p: 2,
       }}
     >
@@ -132,7 +140,7 @@ const SideBar = () => {
                 "sidebar_item " + (isActive ? "active" : "")
               }
             >
-              <IconButton className="">
+              <IconButton>
                 <User />
               </IconButton>
             </NavLink>
@@ -143,73 +151,24 @@ const SideBar = () => {
                 "sidebar_item " + (isActive ? "active" : "")
               }
             >
-              <IconButton className="">
+              <IconButton>
                 <Phone />
               </IconButton>
             </NavLink>
-            {/* {Nav_Buttons.map((item) =>
-              item.index === selected ? (
-                <Box
-                  p={0.5}
-                  key={item.index}
-                  sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    borderRadius: 1.5,
-                  }}
-                >
-                  <IconButton sx={{ color: "#fff", width: "max-content" }}>
-                    {item.icon}
-                  </IconButton>
-                </Box>
-              ) : (
-                <IconButton
-                  key={item.index}
-                  onClick={() => handleChangeTab(item.index)}
-                  sx={{
-                    color:
-                      theme.palette.mode === "light"
-                        ? "#000"
-                        : theme.palette.text.primary,
-                    width: "max-content",
-                  }}
-                >
-                  {item.icon}
-                </IconButton>
-              ),
-            )} */}
+
             <Divider sx={{ width: 48 }} />
 
             {/* map setting Icon */}
-            {Nav_Setting.map((item, i) =>
-              item.index === selected ? (
-                <Box
-                  key={item.index}
-                  p={0.5}
-                  sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    borderRadius: 1.5,
-                  }}
-                >
-                  <IconButton sx={{ color: "#fff", width: "max-content" }}>
-                    {item.icon}
-                  </IconButton>
-                </Box>
-              ) : (
-                <IconButton
-                  key={item.index}
-                  onClick={() => handleChangeTab(item.index)}
-                  sx={{
-                    color:
-                      theme.palette.mode === "light"
-                        ? "#000"
-                        : theme.palette.text.primary,
-                    width: "max-content",
-                  }}
-                >
-                  {item.icon}
-                </IconButton>
-              ),
-            )}
+            <NavLink
+              to="/setting"
+              className={({ isActive }) =>
+                "sidebar_item " + (isActive ? "active" : "")
+              }
+            >
+              <IconButton>
+                <GearSix />
+              </IconButton>
+            </NavLink>
           </Stack>
         </Stack>
 

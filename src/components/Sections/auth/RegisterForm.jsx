@@ -16,9 +16,14 @@ import {
 
 import FormProvider from "../../hook-form/FormProvider";
 import RHFTextField from "../../hook-form/RHFTextField";
+import { signup } from "../../../redux/slices/user";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = React.useState(false);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const schema = yup.object().shape({
     firstName: yup.string().required("First name is required!"),
@@ -31,10 +36,10 @@ const RegisterForm = () => {
   });
 
   const defaultValues = {
-    firstName: "",
-    lastName: "",
-    email: "",
-    password: "",
+    firstName: "Johnny",
+    lastName: "Seans",
+    email: "teppppp3@gmail.com",
+    password: "123456",
   };
 
   const methods = useForm({
@@ -52,6 +57,10 @@ const RegisterForm = () => {
   const onSubmit = async (data) => {
     try {
       // submit data to BE
+      const handleRedirect = () => {
+        navigate("/auth/login");
+      };
+      dispatch(signup(data, handleRedirect));
     } catch (error) {
       console.log("error", error);
       reset();

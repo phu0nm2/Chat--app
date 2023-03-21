@@ -5,12 +5,13 @@ import { Stack } from "@mui/material";
 import GeneralApp from "../../pages/dashboard/GeneralApp";
 import SideBar from "./SideBar";
 import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 // import { Outlet } from "react-router-dom";
 
 const DashboardLayout = () => {
-  const isAuthenticated = false;
+  const { isLogin } = useSelector((state) => state.user);
 
-  if (isAuthenticated) {
+  if (!isLogin) {
     return <Navigate to="/auth/login" />;
   }
   return (

@@ -43,7 +43,7 @@ const Login = () => {
           </Typography>
 
           {/* still got error with the route register */}
-          <Link to="/auth/login" component={RouterLink} variant="subtitle">
+          <Link to="/auth/register" component={RouterLink} variant="subtitle">
             Create an account
           </Link>
         </Stack>

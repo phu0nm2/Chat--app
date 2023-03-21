@@ -16,4 +16,17 @@ export const userApi = {
       },
     );
   },
+
+  signup: ({ firstName, lastName, email, password }) => {
+    const url = "/auth/register";
+    return axiosClient.post(
+      url,
+      { firstName, lastName, email, password },
+      {
+        headers: {
+          "Contet-Type": "application/json",
+        },
+      },
+    );
+  },
 };

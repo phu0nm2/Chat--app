@@ -37,9 +37,7 @@ const Group = () => {
 
   return (
     <Stack direction={"row"}>
-      <Stack>
-        <SideBar />
-      </Stack>
+      <SideBar sx={{ width: "120px" }} />
 
       {/* left */}
       <Box
