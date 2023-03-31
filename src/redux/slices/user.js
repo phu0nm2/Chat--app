@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { userApi } from "../../api/userApi";
+import { closeSnackbar, showSnackbar } from "./app";
 
 const slice = createSlice({
   name: "user",
@@ -26,14 +27,26 @@ export const signin = (values, handleRedirect) => async (dispatch) => {
   try {
     //
     const { data } = await userApi.signin(values);
-    dispatch(slice.actions.signin({ isLogin: true, token: data.token }));
+    dispatch(
+      slice.actions.signin({
+        isLogin: true,
+        token: data.token,
+      }),
+    );
+
+    dispatch(showSnackbar({ severity: data.status, message: data.message }));
+
     if (data.status === "success") {
       localStorage.setItem("token", data.token);
       handleRedirect();
     }
+
+    setTimeout(() => {
+      dispatch(closeSnackbar());
+    }, 3000);
   } catch (error) {
-    alert(error.response.data.message);
-    dispatch(error.response.data.message);
+    const { data } = error.response;
+    dispatch(showSnackbar({ severity: data.status, message: data.message }));
   }
 };
 
@@ -46,10 +59,10 @@ export const signup = (values, handleRedirect) => async (dispatch) => {
     if (data.status === "success") {
       handleRedirect();
     }
-    alert("Congrat!!!");
+    dispatch(showSnackbar({ severity: data.status, message: data.message }));
   } catch (error) {
-    alert(error.response.data.message);
-    dispatch(error.response.data.message);
+    const { data } = error.response;
+    dispatch(showSnackbar({ severity: data.status, message: data.message }));
   }
 };
 

@@ -1,5 +1,6 @@
 import { combineReducers } from "@reduxjs/toolkit";
 import storage from "redux-persist/lib/storage";
+import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2"; // ADDED
 
 //slices
 import appReducer from "./slices/app";
@@ -9,6 +10,8 @@ const rootPersistConfig = {
   key: "root",
   storage,
   keyPrefix: "redux-",
+
+  stateReconciler: autoMergeLevel2, // added it to fix the keys in initialState are removed
   //whitelist: [],
   // blacklist: [],
   //version:[],
