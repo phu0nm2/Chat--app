@@ -12,7 +12,9 @@ import { useTheme } from "@mui/material/styles";
 
 import icons from "../../assets/Images";
 import { ChatList } from "../../data";
-import { SimpleBarStyle } from "../../components/Scrollbar";
+
+import SimpleBarReact from "simplebar-react";
+import "simplebar/src/simplebar.css";
 
 import {
   Search,
@@ -76,10 +78,14 @@ const Chats = () => {
 
         <Stack
           direction="column"
-          sx={{ flexGrow: 1, overflowY: "scroll", height: "100%" }}
+          sx={{
+            flexGrow: 1,
+            overflowY: "scroll",
+            height: "100%",
+          }}
         >
-          {/* SimpleBarStyle not working */}
-          <SimpleBarStyle timeout={500} clickOnTrack={false}>
+          {/* SimpleBarStyle is worked */}
+          <SimpleBarReact style={{ maxHeight: "100%" }}>
             <Stack p={2} spacing={2}>
               <Stack p={1}>
                 <Typography variant="subtitle1" color={"#676667"}>
@@ -103,7 +109,7 @@ const Chats = () => {
                 <AvatarElement key={index} {...item} />
               ))}
             </Stack>
-          </SimpleBarStyle>
+          </SimpleBarReact>
         </Stack>
       </Stack>
     </Box>

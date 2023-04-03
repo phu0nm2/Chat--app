@@ -5,10 +5,11 @@ html *::-webkit-scrollbar {
 
 html *::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: rgba(146, 142, 142, 0.463);
+  background-color: rgba(146, 142, 142, 0.863);
 }
 
 html *::-webkit-scrollbar-track {
   border-radius: 0;
   background-color: rgba(146, 142, 142, 0.463);
+  background-color: transparent;
 }
