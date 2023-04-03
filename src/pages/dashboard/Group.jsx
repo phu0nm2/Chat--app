@@ -20,7 +20,7 @@ import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase
 import { ChatList } from "../../data";
 import AvatarElement from "../../components/AvatarElement";
 import { SimpleBarStyle } from "../../components/Scrollbar";
-import CreateGroup from "../../components/Sections/main/CreateGroup";
+import CreateGroup from "../../components/Sections/mainDialog/CreateGroup";
 
 const Group = () => {
   const theme = useTheme();

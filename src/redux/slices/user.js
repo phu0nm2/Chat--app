@@ -2,9 +2,17 @@ import { createSlice } from "@reduxjs/toolkit";
 import { userApi } from "../../api/userApi";
 import { closeSnackbar, showSnackbar } from "./app";
 
+const initialState = {
+  isLogin: false,
+  token: "",
+  users: [],
+  friends: [],
+  friendRequests: [],
+};
+
 const slice = createSlice({
   name: "user",
-  initialState: { isLogin: false, token: "" },
+  initialState,
   reducers: {
     signin(state, action) {
       state.isLogin = action.payload.isLogin;
@@ -16,6 +24,16 @@ const slice = createSlice({
     },
     signup(state, action) {
       state.currentUser = action.payload;
+    },
+
+    getUsers(state, action) {
+      state.users = action.payload;
+    },
+    getFriends(state, action) {
+      state.friends = action.payload;
+    },
+    getFriendRequests(state, action) {
+      state.friendRequests = action.payload;
     },
   },
 });
@@ -34,18 +52,19 @@ export const signin = (values, handleRedirect) => async (dispatch) => {
       }),
     );
 
-    dispatch(showSnackbar({ severity: data.status, message: data.message }));
-
     if (data.status === "success") {
       localStorage.setItem("token", data.token);
+      localStorage.setItem("user_id", data.user_id);
       handleRedirect();
     }
+
+    dispatch(showSnackbar({ severity: data.status, message: data.message }));
 
     setTimeout(() => {
       dispatch(closeSnackbar());
     }, 3000);
   } catch (error) {
-    const { data } = error.response;
+    const { data } = error?.response;
     dispatch(showSnackbar({ severity: data.status, message: data.message }));
   }
 };
@@ -70,6 +89,35 @@ export const signup = (values, handleRedirect) => async (dispatch) => {
 export const logout = () => async (dispatch) => {
   try {
     dispatch(slice.actions.signOut());
+    localStorage.removeItem("token");
+    localStorage.removeItem("user_id");
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+// get users
+export const fetchUsers = () => async (dispatch) => {
+  try {
+    //
+    const token = localStorage.getItem("token");
+    const { data } = await userApi.getUsers({ token });
+    dispatch(slice.actions.getUsers({ data }));
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const fetchFriends = () => async (dispatch) => {
+  try {
+    //
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const fetchFriendRequests = () => async (dispatch) => {
+  try {
+    //
   } catch (error) {
     console.log(error);
   }

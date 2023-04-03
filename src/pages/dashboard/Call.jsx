@@ -20,7 +20,7 @@ import icons from "../../assets/Images";
 import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase";
 import { CallList } from "../../data";
 import CallElement from "../../components/CallElement";
-import StartCall from "../../components/Sections/main/StartCall";
+import StartCall from "../../components/Sections/mainDialog/StartCall";
 
 const Call = () => {
   const theme = useTheme();

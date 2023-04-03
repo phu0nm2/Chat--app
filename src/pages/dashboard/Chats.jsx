@@ -22,97 +22,119 @@ import {
 } from "../../components/StylesMaterial/Search";
 import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase";
 import AvatarElement from "../../components/AvatarElement";
+import { Users } from "phosphor-react";
+import Friends from "../../components/Sections/mainDialog/Friends";
 
 const Chats = () => {
   const theme = useTheme();
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleOpenFriends = () => {
+    setIsOpen(true);
+  };
+
+  const handleCloseFriends = () => {
+    setIsOpen(false);
+  };
+
   return (
-    <Box
-      sx={{
-        position: "relative",
-        width: 320,
-        backgroundColor:
-          theme.palette.mode === "light"
-            ? "#F8FAFF"
-            : theme.palette.background.default,
-        boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
-      }}
-    >
-      <Stack sx={{ height: "100vh" }}>
-        <Stack
-          direction={"row"}
-          alignItems={"center"}
-          justifyContent={"space-between"}
-        >
-          <Typography p={1} variant="h5">
-            Chats
-          </Typography>
+    <>
+      <Box
+        sx={{
+          position: "relative",
+          width: 320,
+          backgroundColor:
+            theme.palette.mode === "light"
+              ? "#F8FAFF"
+              : theme.palette.background.default,
+          boxShadow: "0px 0px 4px rgba(0, 0, 0, 0.25)",
+        }}
+      >
+        <Stack sx={{ height: "100vh" }}>
+          <Stack
+            direction={"row"}
+            alignItems={"center"}
+            justifyContent={"space-between"}
+          >
+            <Typography p={1} variant="h5">
+              Chats
+            </Typography>
 
-          <IconButton>
-            <img src={icons.circleDashed} alt="circleDashed" />
-          </IconButton>
-        </Stack>
+            <Stack direction={"row"}>
+              <IconButton onClick={handleOpenFriends}>
+                <Users />
+              </IconButton>
+              <IconButton>
+                <img src={icons.circleDashed} alt="circleDashed" />
+              </IconButton>{" "}
+            </Stack>
+          </Stack>
 
-        <Search sx={{ width: "100%", borderRadius: "20px" }}>
-          <SearchIconWrapper>
-            <img
-              style={{ zIndex: "1" }}
-              src={icons.magnifyingGlass}
-              alt="magnifyingGlass"
+          <Search sx={{ width: "100%", borderRadius: "20px" }}>
+            <SearchIconWrapper>
+              <img
+                style={{ zIndex: "1" }}
+                src={icons.magnifyingGlass}
+                alt="magnifyingGlass"
+              />
+            </SearchIconWrapper>
+
+            <StyledInputBase
+              placeholder="Search…"
+              inputProps={{ "aria-label": "search" }}
             />
-          </SearchIconWrapper>
+          </Search>
 
-          <StyledInputBase
-            placeholder="Search…"
-            inputProps={{ "aria-label": "search" }}
-          />
-        </Search>
+          <Stack direction={"row"} p={2} spacing={1.5}>
+            <IconButton>
+              <img src={icons.ArchiveBox} alt="ArchiveBox" />
+            </IconButton>
+            <Button>Archived</Button>
+          </Stack>
 
-        <Stack direction={"row"} p={2} spacing={1.5}>
-          <IconButton>
-            <img src={icons.ArchiveBox} alt="ArchiveBox" />
-          </IconButton>
-          <Button>Archived</Button>
-        </Stack>
+          <Divider />
 
-        <Divider />
+          <Stack
+            direction="column"
+            sx={{
+              flexGrow: 1,
+              overflowY: "scroll",
+              height: "100%",
+            }}
+          >
+            {/* SimpleBarStyle is worked */}
+            <SimpleBarReact style={{ maxHeight: "100%" }}>
+              <Stack p={2} spacing={2}>
+                <Stack p={1}>
+                  <Typography variant="subtitle1" color={"#676667"}>
+                    Pinned
+                  </Typography>
+                </Stack>
 
-        <Stack
-          direction="column"
-          sx={{
-            flexGrow: 1,
-            overflowY: "scroll",
-            height: "100%",
-          }}
-        >
-          {/* SimpleBarStyle is worked */}
-          <SimpleBarReact style={{ maxHeight: "100%" }}>
-            <Stack p={2} spacing={2}>
-              <Stack p={1}>
-                <Typography variant="subtitle1" color={"#676667"}>
-                  Pinned
-                </Typography>
+                {ChatList.filter((items) => items.pinned).map((item, index) => (
+                  <AvatarElement key={index} {...item} />
+                ))}
               </Stack>
 
-              {ChatList.filter((items) => items.pinned).map((item, index) => (
-                <AvatarElement key={index} {...item} />
-              ))}
-            </Stack>
+              <Stack direction={"column"} p={2} spacing={2}>
+                <Stack p={1}>
+                  <Typography variant="subtitle1" color={"#676667"}>
+                    All Chats
+                  </Typography>
+                </Stack>
 
-            <Stack direction={"column"} p={2} spacing={2}>
-              <Stack p={1}>
-                <Typography variant="subtitle1" color={"#676667"}>
-                  All Chats
-                </Typography>
+                {ChatList.filter((items) => !items.pinned).map(
+                  (item, index) => (
+                    <AvatarElement key={index} {...item} />
+                  ),
+                )}
               </Stack>
-
-              {ChatList.filter((items) => !items.pinned).map((item, index) => (
-                <AvatarElement key={index} {...item} />
-              ))}
-            </Stack>
-          </SimpleBarReact>
+            </SimpleBarReact>
+          </Stack>
         </Stack>
-      </Stack>
-    </Box>
+      </Box>
+      {isOpen && <Friends open={isOpen} handleClose={handleCloseFriends} />}
+    </>
   );
 };
 

@@ -29,4 +29,18 @@ export const userApi = {
       },
     );
   },
+
+  getUsers: ({ token }) => {
+    const url = "/user/get-users";
+    return axiosClient.get(
+      url,
+      {},
+      {
+        headers: {
+          "Contet-Type": "application/json",
+          Authorization: `Bearer + ${token}`,
+        },
+      },
+    );
+  },
 };

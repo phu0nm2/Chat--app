@@ -14,7 +14,7 @@ import {
 import { faker } from "@faker-js/faker";
 
 import icons from "../../assets/Images";
-import { Nav_Buttons, Nav_Setting, Profile_Menu } from "../../data";
+import { Profile_Menu } from "../../data";
 import useSettings from "../../hooks/useSettings";
 import { DarkLightSwitch } from "../../components/StylesMaterial/DarkLightSwitch";
 import { Link, NavLink, useNavigate } from "react-router-dom";
@@ -72,7 +72,6 @@ const SideBar = () => {
     navigate(getMenuPatch(e));
     if (e === 2) {
       dispatch(logout());
-      localStorage.removeItem("token");
     }
   };
 
