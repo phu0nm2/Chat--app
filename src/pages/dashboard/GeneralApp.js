@@ -3,17 +3,19 @@ import React from "react";
 import { Box } from "@mui/system";
 
 import Chats from "./Chats";
-import { Stack } from "@mui/material";
+import { Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 import Conversation from "../../components/Conversation";
 import Contact from "../../components/Contact";
 import { useSelector } from "react-redux";
 import SharedMess from "../../components/SharedMess";
 import StartedMess from "../../components/StartedMess";
+import NoChat from "../../assets/Illustration/NoChat";
 
 const GeneralApp = () => {
   const theme = useTheme();
   const { sidebar } = useSelector((state) => state.app || {});
+  const { chat_type, room_id } = useSelector((state) => state.user || {});
   // console.log(sidebar);
 
   return (
@@ -32,7 +34,20 @@ const GeneralApp = () => {
                 : theme.palette.background.default,
           }}
         >
-          <Conversation />
+          {room_id !== null && chat_type === "individual" ? (
+            <Conversation />
+          ) : (
+            <Stack
+              sx={{ height: "100%" }}
+              justifyContent={"center"}
+              alignItems={"center"}
+            >
+              <NoChat />
+              <Typography variant="subtitle2">
+                Select a conversation or start new one
+              </Typography>
+            </Stack>
+          )}
         </Box>
 
         {/* contact */}

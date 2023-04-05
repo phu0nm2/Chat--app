@@ -10,24 +10,36 @@ import {
 } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
 
-import icons from "../../assets/Images";
-import { ChatList } from "../../data";
-
 import SimpleBarReact from "simplebar-react";
 import "simplebar/src/simplebar.css";
 
+import { useDispatch } from "react-redux";
+
+import { Users } from "phosphor-react";
+import icons from "../../assets/Images";
+import { ChatList } from "../../data";
+import { socket } from "../../socket";
+import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase";
 import {
   Search,
   SearchIconWrapper,
 } from "../../components/StylesMaterial/Search";
-import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase";
 import AvatarElement from "../../components/AvatarElement";
-import { Users } from "phosphor-react";
 import Friends from "../../components/Sections/mainDialog/Friends";
 
 const Chats = () => {
   const theme = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
+
+  const user_id = localStorage.getItem("user_id");
+
+  // const dispatch = useDispatch()
+
+  React.useEffect(() => {
+    socket?.emit("get_direct_conversation", { user_id }, (data) => {
+      console.log("data", data);
+    });
+  }, [user_id]);
 
   const handleOpenFriends = () => {
     setIsOpen(true);

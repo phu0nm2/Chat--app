@@ -32,15 +32,31 @@ export const userApi = {
 
   getUsers: ({ token }) => {
     const url = "/user/get-users";
-    return axiosClient.get(
-      url,
-      {},
-      {
-        headers: {
-          "Contet-Type": "application/json",
-          Authorization: `Bearer + ${token}`,
-        },
+    return axiosClient.get(url, {
+      headers: {
+        "Contet-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-    );
+    });
+  },
+
+  getFriends: ({ token }) => {
+    const url = "/user/get-friends";
+    return axiosClient.get(url, {
+      headers: {
+        "Contet-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+  },
+
+  getFriendRequests: ({ token }) => {
+    const url = "/user/get-friends-requests";
+    return axiosClient.get(url, {
+      headers: {
+        "Contet-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
   },
 };

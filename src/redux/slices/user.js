@@ -8,6 +8,8 @@ const initialState = {
   users: [],
   friends: [],
   friendRequests: [],
+  chat_type: null,
+  room_id: null,
 };
 
 const slice = createSlice({
@@ -26,7 +28,7 @@ const slice = createSlice({
       state.currentUser = action.payload;
     },
 
-    getUsers(state, action) {
+    getUserList(state, action) {
       state.users = action.payload;
     },
     getFriends(state, action) {
@@ -34,6 +36,10 @@ const slice = createSlice({
     },
     getFriendRequests(state, action) {
       state.friendRequests = action.payload;
+    },
+    selectConversation(state, action) {
+      state.chat_type = "individual";
+      state.room_id = action.payload;
     },
   },
 });
@@ -96,13 +102,17 @@ export const logout = () => async (dispatch) => {
   }
 };
 
-// get users
+// get users list
 export const fetchUsers = () => async (dispatch) => {
   try {
     //
     const token = localStorage.getItem("token");
+
     const { data } = await userApi.getUsers({ token });
-    dispatch(slice.actions.getUsers({ data }));
+
+    dispatch(slice.actions.getUserList({ data }));
+
+    // console.log("data", data);
   } catch (error) {
     console.log(error);
   }
@@ -111,6 +121,13 @@ export const fetchUsers = () => async (dispatch) => {
 export const fetchFriends = () => async (dispatch) => {
   try {
     //
+    const token = localStorage.getItem("token");
+
+    const { data } = await userApi.getFriends({ token });
+
+    dispatch(slice.actions.getFriends({ data }));
+
+    // console.log("data", data);
   } catch (error) {
     console.log(error);
   }
@@ -118,7 +135,25 @@ export const fetchFriends = () => async (dispatch) => {
 export const fetchFriendRequests = () => async (dispatch) => {
   try {
     //
+    const token = localStorage.getItem("token");
+
+    const { data } = await userApi.getFriendRequests({ token });
+
+    dispatch(slice.actions.getFriendRequests({ data }));
+
+    // console.log("data", data);
   } catch (error) {
     console.log(error);
   }
 };
+
+export const selectConversation =
+  ({ room_id }) =>
+  async (dispatch) => {
+    try {
+      //
+      dispatch(slice.actions.selectConversation({ room_id }));
+    } catch (error) {
+      console.log(error);
+    }
+  };

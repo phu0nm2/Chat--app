@@ -1,5 +1,9 @@
+import React from "react";
+
+import { useDispatch } from "react-redux";
 import { StyledBadge } from "./StylesMaterial/StyledBadge";
 import { Box, Typography, Stack, Avatar, Badge, useTheme } from "@mui/material";
+import { selectConversation } from "../redux/slices/user";
 
 const AvatarElement = (props) => {
   const theme = useTheme();
@@ -7,8 +11,15 @@ const AvatarElement = (props) => {
   // rs.map((item) => console.log(item));
   const { id, img, name, msg, time, unread, pinned, online } = props;
 
+  const dispatch = useDispatch();
+
+  const handleRoomId = () => {
+    dispatch(selectConversation({ room_id: id }));
+  };
+
   return (
     <Box
+      onClick={handleRoomId}
       p={1}
       sx={{
         width: "100%",

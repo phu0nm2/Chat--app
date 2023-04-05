@@ -9,12 +9,21 @@ import {
 
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchUsers } from "../../../redux/slices/user";
+import {
+  fetchFriendRequests,
+  fetchFriends,
+  fetchUsers,
+} from "../../../redux/slices/user";
+import Users from "../../UserElements/Users";
+import FriendElement from "../../UserElements/Friends";
+import FriendRequestElement from "../../UserElements/FriendRequest";
 
 const UserList = () => {
   const dispatch = useDispatch();
 
-  const { users } = useSelector((state) => state.user);
+  const { users } = useSelector((state) => state.user || {});
+
+  // const { data } = users?.data;
 
   React.useEffect(() => {
     dispatch(fetchUsers());
@@ -22,12 +31,51 @@ const UserList = () => {
 
   return (
     <>
-      {users.map((user, index) => (
+      {users.data?.data?.map((user, index) => (
         // user component
-        <div key={index}>
-          <h1>{user}</h1>
-          <h1>Hello Friend</h1>
-        </div>
+        <Users key={user._id} {...user} />
+      ))}
+    </>
+  );
+};
+
+const FriendList = () => {
+  const dispatch = useDispatch();
+
+  const { friends } = useSelector((state) => state.user);
+
+  React.useEffect(() => {
+    dispatch(fetchFriends());
+  }, [dispatch]);
+
+  return (
+    <>
+      {friends.data?.data?.map((friend, index) => (
+        // user component
+        <FriendElement key={index} {...friend} />
+      ))}
+    </>
+  );
+};
+
+const FriendRequest = () => {
+  const dispatch = useDispatch();
+
+  const { friendRequests } = useSelector((state) => state.user);
+
+  React.useEffect(() => {
+    dispatch(fetchFriendRequests());
+  }, [dispatch]);
+
+  return (
+    <>
+      {friendRequests.data?.data?.map((friendRequest, index) => (
+        // user component
+        <FriendRequestElement
+          key={index}
+          {...friendRequest.sender}
+          id={friendRequest._id}
+        />
       ))}
     </>
   );
@@ -58,13 +106,13 @@ const Friends = ({ open, handleClose }) => {
                 return <UserList />;
 
               case 1: // get friends
-                break;
+                return <FriendList />;
 
               case 2: // get friend request
-                break;
+                return <FriendRequest />;
 
               default:
-                break;
+                return <UserList />;
             }
           })()}
         </Stack>
