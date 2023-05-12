@@ -92,9 +92,12 @@ const ChatHeader = () => {
           <IconButton>
             <VideoCamera />
           </IconButton>
+
+          {/* todo: open call dialog box */}
           <IconButton>
             <Phone />
           </IconButton>
+
           {!isMobile && (
             <IconButton>
               <MagnifyingGlass />

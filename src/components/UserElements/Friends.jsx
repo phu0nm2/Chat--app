@@ -3,6 +3,9 @@ import React from "react";
 import { Avatar, Button, Stack, Typography, useTheme } from "@mui/material";
 import { StyledChatBox } from "../StylesMaterial/StyledChatBox";
 import { StyledBadge } from "../StylesMaterial/StyledBadge";
+import { socket } from "../../socket";
+
+const user_id = localStorage.getItem("user_id");
 
 const FriendElement = ({ online, img, firstName, lastName, _id }) => {
   const theme = useTheme();
@@ -11,6 +14,7 @@ const FriendElement = ({ online, img, firstName, lastName, _id }) => {
 
   const handleSentRequest = () => {
     // start a conversation
+    socket.emit("start_conversation", { to: _id, from: user_id });
   };
 
   return (

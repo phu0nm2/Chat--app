@@ -7,6 +7,7 @@ import {
   DialogTitle,
   IconButton,
   Stack,
+  Typography,
   useTheme,
 } from "@mui/material";
 
@@ -30,9 +31,12 @@ const StartCall = ({ open, handleClose }) => {
               : theme.palette.background.default,
         }}
         direction={"row"}
-        justifyContent={"flex-end"}
+        justifyContent={"space-around"}
         p={1}
       >
+        <Typography variant="title" p={1}>
+          Choose a friend to call
+        </Typography>
         <IconButton onClick={handleClose}>
           <XCircle />
         </IconButton>

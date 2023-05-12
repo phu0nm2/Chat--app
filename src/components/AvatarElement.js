@@ -3,7 +3,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { StyledBadge } from "./StylesMaterial/StyledBadge";
 import { Box, Typography, Stack, Avatar, Badge, useTheme } from "@mui/material";
-import { selectConversation } from "../redux/slices/user";
+import { selectConversation } from "../redux/slices/conversation";
 
 const AvatarElement = (props) => {
   const theme = useTheme();

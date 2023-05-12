@@ -5,6 +5,7 @@ import autoMergeLevel2 from "redux-persist/lib/stateReconciler/autoMergeLevel2";
 //slices
 import appReducer from "./slices/app";
 import user from "./slices/user";
+import conversation from "./slices/conversation";
 
 const rootPersistConfig = {
   key: "root",
@@ -20,6 +21,7 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   app: appReducer,
   user: user,
+  conversation: conversation,
 });
 
 export { rootPersistConfig, rootReducer };

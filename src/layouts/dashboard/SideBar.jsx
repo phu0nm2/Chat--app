@@ -23,15 +23,16 @@ import "./Sidebar.scss";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/slices/user";
 
-const getPatch = (index) => {
-  switch (index) {
-    case 3:
-      return "/settings";
+// const getPatch = (index) => {
+//   switch (index) {
+//     case 3:
+//       return "/settings";
 
-    default:
-      break;
-  }
-};
+//     default:
+//       break;
+//   }
+// };
+
 const getMenuPatch = (index) => {
   switch (index) {
     case 0:
@@ -50,7 +51,7 @@ const SideBar = () => {
   const theme = useTheme();
   const navigate = useNavigate();
   const { onToggleMode } = useSettings();
-  const [selected, setSelected] = React.useState(0);
+  // const [selected, setSelected] = React.useState(0);
   const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -63,10 +64,10 @@ const SideBar = () => {
     setAnchorEl(null);
   };
 
-  const handleChangeTab = (e) => {
-    setSelected(e);
-    navigate(getPatch(e));
-  };
+  // const handleChangeTab = (e) => {
+  //   setSelected(e);
+  //   navigate(getPatch(e));
+  // };
 
   const handleRedirectMenu = (e) => {
     navigate(getMenuPatch(e));
@@ -159,7 +160,7 @@ const SideBar = () => {
 
             {/* map setting Icon */}
             <NavLink
-              to="/setting"
+              to="/settings"
               className={({ isActive }) =>
                 "sidebar_item " + (isActive ? "active" : "")
               }

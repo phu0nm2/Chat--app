@@ -13,7 +13,7 @@ import { useTheme } from "@mui/material/styles";
 import SimpleBarReact from "simplebar-react";
 import "simplebar/src/simplebar.css";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { Users } from "phosphor-react";
 import icons from "../../assets/Images";
@@ -27,11 +27,17 @@ import {
 import AvatarElement from "../../components/AvatarElement";
 import Friends from "../../components/Sections/mainDialog/Friends";
 
+const user_id = localStorage.getItem("user_id");
+
 const Chats = () => {
   const theme = useTheme();
   const [isOpen, setIsOpen] = React.useState(false);
 
-  const user_id = localStorage.getItem("user_id");
+  const { conversations } = useSelector(
+    (state) => state.conversation.direct_chat,
+  );
+
+  // console.log("conversations", conversations);
 
   // const dispatch = useDispatch()
 
@@ -39,7 +45,7 @@ const Chats = () => {
     socket?.emit("get_direct_conversation", { user_id }, (data) => {
       console.log("data", data);
     });
-  }, [user_id]);
+  }, []);
 
   const handleOpenFriends = () => {
     setIsOpen(true);
@@ -123,9 +129,9 @@ const Chats = () => {
                   </Typography>
                 </Stack>
 
-                {ChatList.filter((items) => items.pinned).map((item, index) => (
+                {/* {ChatList.filter((items) => items.pinned).map((item, index) => (
                   <AvatarElement key={index} {...item} />
-                ))}
+                ))} */}
               </Stack>
 
               <Stack direction={"column"} p={2} spacing={2}>
@@ -135,11 +141,11 @@ const Chats = () => {
                   </Typography>
                 </Stack>
 
-                {ChatList.filter((items) => !items.pinned).map(
-                  (item, index) => (
+                {conversations
+                  .filter((items) => !items.pinned)
+                  .map((item, index) => (
                     <AvatarElement key={index} {...item} />
-                  ),
-                )}
+                  ))}
               </Stack>
             </SimpleBarReact>
           </Stack>
