@@ -4,9 +4,9 @@ const token = localStorage.getItem("token");
 
 const axiosClient = axios.create({
   baseURL: "http://localhost:8000",
-  headers: {
-    token,
-  },
+  // headers: {
+  //   token,
+  // },
 });
 axios.interceptors.response.use(
   function (response) {

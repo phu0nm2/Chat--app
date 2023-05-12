@@ -22,6 +22,7 @@ import { ChatCircleDots, GearSix, Phone, User } from "phosphor-react";
 import "./Sidebar.scss";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/slices/user";
+import { socket } from "../../socket";
 
 // const getPatch = (index) => {
 //   switch (index) {
@@ -32,6 +33,8 @@ import { logout } from "../../redux/slices/user";
 //       break;
 //   }
 // };
+
+const user_id = localStorage.getItem("user_id");
 
 const getMenuPatch = (index) => {
   switch (index) {
@@ -73,6 +76,8 @@ const SideBar = () => {
     navigate(getMenuPatch(e));
     if (e === 2) {
       dispatch(logout());
+      socket.emit("end");
+      socket.emit("end", { user_id });
     }
   };
 

@@ -1,17 +1,32 @@
 import React from "react";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { StyledBadge } from "./StylesMaterial/StyledBadge";
-import { Box, Typography, Stack, Avatar, Badge, useTheme } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  Avatar,
+  Badge,
+  useTheme,
+  alpha,
+} from "@mui/material";
 import { selectConversation } from "../redux/slices/conversation";
 
-const AvatarElement = (props) => {
+const ChatElement = (props) => {
   const theme = useTheme();
   // const rs = ChatList.filter((items) => items?.pinned);
   // rs.map((item) => console.log(item));
   const { id, img, name, msg, time, unread, pinned, online } = props;
 
   const dispatch = useDispatch();
+  const { room_id } = useSelector((state) => state.conversation);
+  const selectedChatId = room_id?.toString();
+  let isSelected = +selectedChatId === id;
+
+  if (!selectedChatId) {
+    isSelected = false;
+  }
 
   const handleRoomId = () => {
     dispatch(selectConversation({ room_id: id }));
@@ -24,9 +39,13 @@ const AvatarElement = (props) => {
       sx={{
         width: "100%",
         height: 60,
-        backgroundColor:
-          theme.palette.mode === "light" ? "rgba(217,213,213,0.7)" : "#4b4f55",
-        borderRadius: 1,
+        backgroundColor: isSelected
+          ? theme.palette.mode === "light"
+            ? alpha(theme.palette.primary.main, 0.5)
+            : theme.palette.primary.main
+          : theme.palette.mode === "light"
+          ? "#fff"
+          : theme.palette.background.paper,
       }}
     >
       <Stack
@@ -41,10 +60,10 @@ const AvatarElement = (props) => {
               anchorOrigin={{ vertical: "bottom", horizontal: "right" }}
               variant="dot"
             >
-              <Avatar src={img} alt="avatar" />
+              <Avatar src={img} alt={name} />
             </StyledBadge>
           ) : (
-            <Avatar src={img} alt="avatar" />
+            <Avatar src={img} alt={name} />
           )}
 
           <Stack>
@@ -76,4 +95,4 @@ const AvatarElement = (props) => {
     </Box>
   );
 };
-export default AvatarElement;
+export default ChatElement;

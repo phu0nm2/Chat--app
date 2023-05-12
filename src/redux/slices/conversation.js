@@ -7,6 +7,8 @@ const initialState = {
 
   direct_chat: {
     conversations: [],
+    current_conversation: null,
+    current_message: [],
   },
 
   chat_type: null,
@@ -28,7 +30,7 @@ const slice = createSlice({
             user_id: user?._id,
             img: faker.image.avatar(),
             name: `${user?.fistName} ${user?.lastName}`,
-            msg: faker.music.songName(),
+            msg: el.messages.slice(-1)[0].text,
             time: "9:36",
             unread: 0,
             pinned: false,
@@ -40,7 +42,28 @@ const slice = createSlice({
 
     selectConversation(state, action) {
       state.chat_type = "individual";
-      state.room_id = action.payload;
+      state.room_id = action.payload.room_id;
+    },
+
+    setCurrentConversation(state, action) {
+      state.direct_chat.current_conversation = action.payload;
+    },
+
+    fetchCurrentMessage(state, action) {
+      const messages = action.payload.messages;
+      const formatted_messages = messages.map((el) => ({
+        id: el._id,
+        type: "msg",
+        subtype: el.type,
+        message: el.text,
+        incoming: el.to === user_id,
+        outgoing: el.from === user_id,
+      }));
+      state.direct_chat.current_message = formatted_messages;
+    },
+
+    addDirectMessage(state, action) {
+      state.direct_chat.current_message.push(action.payload.message);
     },
 
     updateDirectConversation(state, action) {
@@ -135,6 +158,35 @@ export const addDirectConversation =
     try {
       //
       dispatch(slice.actions.addDirectConversation({ conversation }));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const setCurrentConversation =
+  ({ current_conversation }) =>
+  async (dispatch) => {
+    try {
+      dispatch(slice.actions.setCurrentConversation(current_conversation));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+export const fetchCurrentMessage =
+  ({ messages }) =>
+  async (dispatch) => {
+    try {
+      dispatch(slice.actions.fetchCurrentMessage(messages));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+export const addDirectMessage =
+  ({ message }) =>
+  async (dispatch) => {
+    try {
+      dispatch(slice.actions.addDirectMessage(message));
     } catch (error) {
       console.log(error);
     }

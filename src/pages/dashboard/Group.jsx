@@ -18,7 +18,7 @@ import SideBar from "../../layouts/dashboard/SideBar";
 import icons from "../../assets/Images";
 import { StyledInputBase } from "../../components/StylesMaterial/StyledInputBase";
 import { ChatList } from "../../data";
-import AvatarElement from "../../components/AvatarElement";
+import ChatElement from "../../components/ChatElement";
 import { SimpleBarStyle } from "../../components/Scrollbar";
 import CreateGroup from "../../components/Sections/mainDialog/CreateGroup";
 
@@ -119,7 +119,7 @@ const Group = () => {
               </Stack>
 
               {ChatList.filter((items) => items.pinned).map((item, index) => (
-                <AvatarElement key={index} {...item} />
+                <ChatElement key={index} {...item} />
               ))}
             </Stack>
 
@@ -131,7 +131,7 @@ const Group = () => {
               </Stack>
 
               {ChatList.filter((items) => !items.pinned).map((item, index) => (
-                <AvatarElement key={index} {...item} />
+                <ChatElement key={index} {...item} />
               ))}
             </Stack>
           </SimpleBarStyle>

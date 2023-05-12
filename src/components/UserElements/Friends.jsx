@@ -4,6 +4,7 @@ import { Avatar, Button, Stack, Typography, useTheme } from "@mui/material";
 import { StyledChatBox } from "../StylesMaterial/StyledChatBox";
 import { StyledBadge } from "../StylesMaterial/StyledBadge";
 import { socket } from "../../socket";
+import { Chat } from "phosphor-react";
 
 const user_id = localStorage.getItem("user_id");
 
@@ -12,10 +13,10 @@ const FriendElement = ({ online, img, firstName, lastName, _id }) => {
 
   const name = `${firstName} ${lastName}`;
 
-  const handleSentRequest = () => {
-    // start a conversation
-    socket.emit("start_conversation", { to: _id, from: user_id });
-  };
+  // const handleSentRequest = () => {
+  //   // start a conversation
+  //   socket.emit("start_conversation", { to: _id, from: user_id });
+  // };
 
   return (
     <StyledChatBox
@@ -50,7 +51,13 @@ const FriendElement = ({ online, img, firstName, lastName, _id }) => {
           </Stack>
         </Stack>
         <Stack direction={"row"} spacing={2} alignItems={"center"}>
-          <Button onClick={handleSentRequest}>Send Request</Button>
+          <Button
+            onClick={() => {
+              socket.emit("start_conversation", { to: _id, from: user_id });
+            }}
+          >
+            <Chat />
+          </Button>
         </Stack>
       </Stack>
     </StyledChatBox>

@@ -51,9 +51,9 @@ const DashboardLayout = () => {
       );
 
       if (existing_conversation) {
-        dispatch(updateDirectConversation({ params: data })); // params: conversation
+        dispatch(updateDirectConversation({ conversation: data })); // params: conversation
       } else {
-        dispatch(addDirectConversation({ params: data }));
+        dispatch(addDirectConversation({ conversation: data }));
       }
       dispatch(selectConversation({ room_id: data._id }));
     });

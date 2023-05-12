@@ -24,8 +24,9 @@ import {
   Search,
   SearchIconWrapper,
 } from "../../components/StylesMaterial/Search";
-import AvatarElement from "../../components/AvatarElement";
+import ChatElement from "../../components/ChatElement";
 import Friends from "../../components/Sections/mainDialog/Friends";
+import { fetchDirectConversations } from "../../redux/slices/conversation";
 
 const user_id = localStorage.getItem("user_id");
 
@@ -39,13 +40,14 @@ const Chats = () => {
 
   // console.log("conversations", conversations);
 
-  // const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
     socket?.emit("get_direct_conversation", { user_id }, (data) => {
       console.log("data", data);
+      dispatch(fetchDirectConversations({ conversations: data }));
     });
-  }, []);
+  }, [dispatch]);
 
   const handleOpenFriends = () => {
     setIsOpen(true);
@@ -130,7 +132,7 @@ const Chats = () => {
                 </Stack>
 
                 {/* {ChatList.filter((items) => items.pinned).map((item, index) => (
-                  <AvatarElement key={index} {...item} />
+                  <ChatElement key={index} {...item} />
                 ))} */}
               </Stack>
 
@@ -143,9 +145,14 @@ const Chats = () => {
 
                 {conversations
                   .filter((items) => !items.pinned)
-                  .map((item, index) => (
-                    <AvatarElement key={index} {...item} />
-                  ))}
+                  .map(
+                    (item, index) => {
+                      return <ChatElement {...item} />;
+                    },
+                    // (
+                    //   <ChatElement key={index} {...item} />
+                    // )
+                  )}
               </Stack>
             </SimpleBarReact>
           </Stack>

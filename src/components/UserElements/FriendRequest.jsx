@@ -18,10 +18,8 @@ const FriendRequestElement = ({
 
   const name = `${firstName} ${lastName}`;
 
-  const handleSentRequest = () => {
-    socket?.emit("accept_request", { request_id: id }, () => {
-      alert("accept request");
-    });
+  const handleAcceptRequest = () => {
+    socket?.emit("accept_request", { request_id: id });
   };
 
   return (
@@ -57,7 +55,7 @@ const FriendRequestElement = ({
           </Stack>
         </Stack>
         <Stack direction={"row"} spacing={2} alignItems={"center"}>
-          <Button onClick={handleSentRequest}>Accept Request</Button>
+          <Button onClick={handleAcceptRequest}>Accept Request</Button>
         </Stack>
       </Stack>
     </StyledChatBox>
