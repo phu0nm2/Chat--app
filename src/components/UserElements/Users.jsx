@@ -6,16 +6,20 @@ import { StyledBadge } from "../StylesMaterial/StyledBadge";
 
 import { socket } from "../../socket";
 
+const user_id = localStorage.getItem("user_id");
+
 const Users = ({ online, img, firstName, lastName, _id }) => {
   const theme = useTheme();
 
   const name = `${firstName} ${lastName}`;
-  const user_id = localStorage.getItem("user_id");
+  // console.log("user_id", user_id);
+  // console.log("name", name);
 
   const handleSentRequest = () => {
-    socket?.emit("friend_request", { to: _id, from: user_id }, () => {
+    socket.emit("friend_request", { to: _id, from: user_id }, () => {
       alert("request sent");
     });
+    console.log("request_sent");
   };
 
   return (

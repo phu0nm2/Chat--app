@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogContent,
   DialogTitle,
+  Slide,
   Stack,
   Tab,
   Tabs,
@@ -18,6 +19,10 @@ import Users from "../../UserElements/Users";
 import FriendElement from "../../UserElements/Friends";
 import FriendRequestElement from "../../UserElements/FriendRequest";
 
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 const UserList = () => {
   const dispatch = useDispatch();
 
@@ -27,13 +32,13 @@ const UserList = () => {
 
   React.useEffect(() => {
     dispatch(fetchUsers());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
       {users.data?.data?.map((user, index) => (
         // user component
-        <Users key={user._id} {...user} />
+        <Users key={index} {...user} />
       ))}
     </>
   );
@@ -46,7 +51,7 @@ const FriendList = () => {
 
   React.useEffect(() => {
     dispatch(fetchFriends());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
@@ -65,12 +70,12 @@ const FriendRequest = () => {
 
   React.useEffect(() => {
     dispatch(fetchFriendRequests());
-  }, [dispatch]);
+  }, []);
 
   return (
     <>
       {friendRequests.data?.data?.map((friendRequest, index) => (
-        // user component
+        // friend request component
         <FriendRequestElement
           key={index}
           {...friendRequest.sender}
@@ -89,7 +94,16 @@ const Friends = ({ open, handleClose }) => {
   };
 
   return (
-    <Dialog open={open} onClose={handleClose}>
+    <Dialog
+      fullWidth
+      maxWidth="xs"
+      open={open}
+      TransitionComponent={Transition}
+      keepMounted
+      onClose={handleClose}
+      aria-describedby="alert-dialog-slide-description"
+      sx={{ p: 4 }}
+    >
       <DialogTitle id="alert-dialog-title">We are friend ^^!</DialogTitle>
       <Stack p={2} sx={{ width: "100%" }}>
         <Tabs value={value} onChange={handleChange} centered>
@@ -112,7 +126,7 @@ const Friends = ({ open, handleClose }) => {
                 return <FriendRequest />;
 
               default:
-                return <UserList />;
+                break;
             }
           })()}
         </Stack>

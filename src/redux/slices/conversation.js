@@ -49,7 +49,7 @@ const slice = createSlice({
       state.direct_chat.current_conversation = action.payload;
     },
 
-    fetchCurrentMessage(state, action) {
+    fetchCurrentMessages(state, action) {
       const messages = action.payload.messages;
       const formatted_messages = messages.map((el) => ({
         id: el._id,
@@ -62,7 +62,7 @@ const slice = createSlice({
       state.direct_chat.current_message = formatted_messages;
     },
 
-    addDirectMessage(state, action) {
+    addDirectMessages(state, action) {
       state.direct_chat.current_message.push(action.payload.message);
     },
 
@@ -131,11 +131,12 @@ export const selectConversation =
   };
 
 export const fetchDirectConversations =
-  ({ values }) =>
+  ({ conversations }) =>
   async (dispatch) => {
     try {
       //
-      dispatch(slice.actions.getDirectConversations({ values }));
+      dispatch(slice.actions.getDirectConversations({ conversations }));
+      // console.log(conversations);
     } catch (error) {
       console.log(error);
     }
@@ -177,7 +178,7 @@ export const fetchCurrentMessage =
   ({ messages }) =>
   async (dispatch) => {
     try {
-      dispatch(slice.actions.fetchCurrentMessage(messages));
+      dispatch(slice.actions.fetchCurrentMessages(messages));
     } catch (error) {
       console.log(error);
     }
@@ -186,7 +187,7 @@ export const addDirectMessage =
   ({ message }) =>
   async (dispatch) => {
     try {
-      dispatch(slice.actions.addDirectMessage(message));
+      dispatch(slice.actions.addDirectMessages(message));
     } catch (error) {
       console.log(error);
     }

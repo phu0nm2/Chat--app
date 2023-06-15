@@ -5,7 +5,7 @@ import { CaretLeft } from "phosphor-react";
 import { useDispatch } from "react-redux";
 
 import { updateSidebarTypeAction } from "../../redux/slices/app";
-import Messenger from "../Conversation/Messenger";
+import MessengerConversation from "../Conversation";
 
 const StartedMess = () => {
   const dispatch = useDispatch();
@@ -37,7 +37,7 @@ const StartedMess = () => {
           }}
         >
           {/* render all messages from component Messenger */}
-          <Messenger />
+          <MessengerConversation />
         </Stack>
       </Stack>
     </Box>

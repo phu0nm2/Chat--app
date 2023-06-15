@@ -5,12 +5,13 @@ import { Box } from "@mui/system";
 import Chats from "./Chats";
 import { Stack, Typography } from "@mui/material";
 import { useTheme } from "@mui/material/styles";
-import Conversation from "../../components/Conversation";
+
 import Contact from "../../components/Contact";
 import { useSelector } from "react-redux";
 import SharedMess from "../../components/SharedMess";
 import StartedMess from "../../components/StartedMess";
 import NoChat from "../../assets/Illustration/NoChat";
+import ChatComponent from "../../components/Conversation";
 
 const GeneralApp = () => {
   const theme = useTheme();
@@ -34,8 +35,8 @@ const GeneralApp = () => {
                 : theme.palette.background.default,
           }}
         >
-          {room_id !== null && chat_type === "individual" ? (
-            <Conversation />
+          {chat_type === "individual" && room_id !== null ? (
+            <ChatComponent />
           ) : (
             <Stack
               sx={{ height: "100%" }}

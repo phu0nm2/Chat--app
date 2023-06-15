@@ -53,7 +53,7 @@ const DotsThree = () => {
   );
 };
 
-export const TextMessage = ({ el }) => {
+export const TextMessage = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -79,12 +79,12 @@ export const TextMessage = ({ el }) => {
         </Typography>
       </Box>
       {/* menu dots three */}
-      <DotsThree />
+      {menu && <DotsThree />}
     </Stack>
   );
 };
 
-export const MediaMessage = ({ el }) => {
+export const MediaMessage = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -109,12 +109,12 @@ export const MediaMessage = ({ el }) => {
           />
         </Stack>
       </Box>
-      <DotsThree />
+      {menu && <DotsThree />}
     </Stack>
   );
 };
 
-export const LinkMessage = ({ el }) => {
+export const LinkMessage = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -142,12 +142,12 @@ export const LinkMessage = ({ el }) => {
       {/* <Link href="https://www.google.com/">
         <DownloadSimple size={25} />
       </Link> */}
-      <DotsThree />
+      {menu && <DotsThree />}
     </Stack>
   );
 };
 
-export const DocMessage = ({ el }) => {
+export const DocMessage = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -188,12 +188,12 @@ export const DocMessage = ({ el }) => {
           {el.message}
         </Typography>
       </Box>
-      <DotsThree />
+      {menu && <DotsThree />}
     </Stack>
   );
 };
 
-export const ReplyMessage = ({ el }) => {
+export const ReplyMessage = ({ el, menu }) => {
   const theme = useTheme();
   return (
     <Stack
@@ -228,7 +228,7 @@ export const ReplyMessage = ({ el }) => {
           </Typography>
         </Stack>
       </Box>
-      <DotsThree />
+      {menu && <DotsThree />}
     </Stack>
   );
 };
